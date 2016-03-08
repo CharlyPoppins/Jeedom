@@ -10,7 +10,10 @@
 #De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
 # Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
 
-
+#status sous syno de apache2 et demarrage des services
+cd /home
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/jeedom.sh
+chmod +x jeedom.sh
 
 #recup config apache2 pour ne pas avoir de messages d'erreurs
 #Faut repondre N lors de la question à l'install de apache2
