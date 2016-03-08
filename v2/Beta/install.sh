@@ -1,4 +1,13 @@
 #!/bin/sh
+
+#recup config apache2 pour ne pas avoir de messages d'erreurs
+#Faut repondre N lors de la question à l'install de apache2
+cd /tmp
+mkdir /etc/apache2/
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/apache2.conf
+mv /tmp/apache2.conf /etc/apache2
+
+
 chmod 777 /dev/tty*
 apt-get update
 apt-get -y install locales
@@ -67,16 +76,12 @@ mv *  /var/www/html
 service apache2 stop
 
 #config apache2
-sed -i 's/max_execution_time = 30/max_execution_time = 300/g' /etc/php5/apache2/php.ini
+sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/apache2/php.ini
 sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/apache2/php.ini
 sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/apache2/php.ini
 sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/apache2/php.ini
 
-cd /tmp
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/apache2.conf
-mv /tmp/apache2.conf /etc/apache2
-	
-	
+
 #config des droits	
 sudo su -
 echo "www-data ALL=(ALL) NOPASSWD: ALL" | (EDITOR="tee -a" visudo)
@@ -88,4 +93,4 @@ cronjob="* * * * * $croncmd"
 ( crontab -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -
 
 service cron restart
-sevice apache2 start
+service apache2 start
