@@ -1,5 +1,11 @@
 #!/bin/sh
-
+#SFY alias stef74
+#Version jeedom 2.1.1 en chroot synology
+# dans le chroot
+#cd /tmp
+#wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install.sh
+#chmod+x install.sh
+#sh install.sh
 #recup config apache2 pour ne pas avoir de messages d'erreurs
 #Faut repondre N lors de la question à l'install de apache2
 cd /tmp
