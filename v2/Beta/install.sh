@@ -57,7 +57,7 @@ echo "cd /home" >> ~/.bashrc
 cd /tmp
 
 # on recupere la Version 2.1.1
-wget https://github.com/jeedom/core/archive/stable.zip
+wget --no-check-certificate https://github.com/jeedom/core/archive/stable.zip
 
 #Decompression du fichier
 unzip /tmp/stable.zip -d /tmp
@@ -73,7 +73,8 @@ sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/apache2/php.ini
 sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/apache2/php.ini
 
 cd /tmp
-wget https://github.com/PuNiSHeR374/Jeedom/blob/master/v2/Beta/apache2.conf
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/apache2.conf
+mv /tmp/apache2.conf /etc/apache2
 	
 	
 #config des droits	
