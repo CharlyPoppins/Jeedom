@@ -6,13 +6,17 @@
 #wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install.sh
 #chmod+x install.sh
 #sh install.sh
+# Le port 8088 doit être non utilisé
+#De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
+
+
+
 #recup config apache2 pour ne pas avoir de messages d'erreurs
 #Faut repondre N lors de la question à l'install de apache2
 cd /tmp
 mkdir /etc/apache2/
 wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/apache2.conf
 mv /tmp/apache2.conf /etc/apache2
-
 
 chmod 777 /dev/tty*
 apt-get update
@@ -21,6 +25,7 @@ dpkg-reconfigure tzdata
 dpkg-reconfigure locales
 apt-get -y upgrade
 apt-get -y install build-essential
+apt-get -y install Dialog
 apt-get -y install sudo
 apt-get -y install curl
 apt-get -y install libarchive-dev
@@ -35,6 +40,9 @@ apt-get -y install mc
 apt-get -y install vim
 apt-get -y install miniupnpc
 apt-get -y install apache2
+
+
+
 apt-get -y install libarchive-dev
 apt-get -y install libav-tools
 apt-get -y install libjsoncpp-dev
@@ -89,7 +97,6 @@ sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/apache2/php.ini
 
 
 #config des droits	
-sudo su -
 echo "www-data ALL=(ALL) NOPASSWD: ALL" | (EDITOR="tee -a" visudo)
 
 
