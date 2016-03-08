@@ -121,5 +121,11 @@ croncmd="su --shell=/bin/bash - www-data -c '/usr/bin/php /var/www/html/core/php
 cronjob="* * * * * $croncmd"
 ( crontab -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -
 
+
+
+sudo chmod -R 775 /tmp/
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 775 /var/www/html
+
 service cron restart
 service apache2 start
