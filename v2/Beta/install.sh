@@ -44,9 +44,12 @@ apt-get -y install mc
 apt-get -y install vim
 apt-get -y install miniupnpc
 apt-get -y install apache2
-
-
-
+apt-get -y install apache2.2-common
+apt-get -y install bsd-mailx
+apt-get -y install cython
+apt-get -y install docutils-common
+apt-get -y install javascript-common
+apt-get -y install locate
 apt-get -y install libarchive-dev
 apt-get -y install libav-tools
 apt-get -y install libjsoncpp-dev
@@ -54,6 +57,15 @@ apt-get -y install libpcre3-dev
 apt-get -y install libssh2-php
 apt-get -y install libtinyxml-dev
 apt-get -y install libxml2
+apt-get -y install mercurial-common
+apt-get -y install mysql-client-5.5
+apt-get -y install ncurses-term
+apt-get -y install node
+apt-get -y install node-normalize-package-data
+apt-get -y install node-request
+apt-get -y install python-requests
+
+apt-get -y install nodejs
 apt-get -y install ntp
 apt-get -y install php5-common libapache2-mod-php5 php5-cli
 apt-get -y install php5-curl
