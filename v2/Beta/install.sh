@@ -75,6 +75,7 @@ apt-get -y install php5-fpm
 apt-get -y install php5-json
 apt-get -y install php5-mysql
 apt-get -y install php5-ldap
+apt-get -y install php5-gd
 apt-get -y install php-pear
 apt-get -y install python-serial
 apt-get -y install systemd
