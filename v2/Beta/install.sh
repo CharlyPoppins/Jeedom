@@ -96,21 +96,29 @@ echo "cd /home" >> ~/.bashrc
 # on se place dans le repertoire de travail
 cd /tmp
 
+#################################Perso########################################
 # on recupere la Version 2.1.1
-wget --no-check-certificate https://github.com/jeedom/core/archive/stable.zip
+#wget --no-check-certificate https://github.com/jeedom/core/archive/stable.zip
 
 #Decompression du fichier
-unzip /tmp/stable.zip -d /tmp
-cd /tmp/core-stable
-mv *  /var/www/html
-
+#unzip /tmp/stable.zip -d /tmp
+#cd /tmp/core-stable
+#mv *  /var/www/html
+###############################################################################
 service apache2 stop
+
+wget https://raw.githubusercontent.com/jeedom/core/stable/install/apache_security -O /etc/apache2/conf-available/security.conf
+rm /etc/apache2/conf-enabled/security.conf
+ln -s /etc/apache2/conf-available/security.conf /etc/apache2/conf-enabled/
+
+rm /var/www/html/index.html
 
 #config apache2
 sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/apache2/php.ini
 sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/apache2/php.ini
 sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/apache2/php.ini
 sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/apache2/php.ini
+sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
 
 
 #config des droits	
@@ -118,15 +126,22 @@ echo "www-data ALL=(ALL) NOPASSWD: ALL" | (EDITOR="tee -a" visudo)
 
 
 #config du cron
-croncmd="su --shell=/bin/bash - www-data -c '/usr/bin/php /var/www/html/core/php/jeeCron.php' >> /dev/null 2>&1"
+croncmd="su --shell=/bin/bash - www-data -c '/usr/bin/php /var/www/html/core/php/jeeCron.php' >> /dev/null"
 cronjob="* * * * * $croncmd"
 ( crontab -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -
 
-
-
-sudo chmod -R 775 /tmp/
+#droits jeedom
 sudo chown -R www-data:www-data /var/www/html
 sudo chmod -R 775 /var/www/html
 
+#d'apres la doc jeedom
+mkdir -p /var/www/html
+rm -rf /root/core-*
+wget https://github.com/jeedom/core/archive/stable.zip -O /tmp/jeedom.zip
+unzip -q /tmp/jeedom.zip -d /root/
+cp -R /root/core-*/* /var/www/html/
+cp -R /root/core-*/.htaccess /var/www/html/
+
+# redemarrage des services
 service cron restart
-service apache2 start
+systemctl restart apache2
