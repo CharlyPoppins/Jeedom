@@ -10,6 +10,7 @@
 #De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
 # Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
 # Enocean don't work on 32bits
+#Lors de l'install de apache repondre N a la question.
 
 #status sous syno de apache2 et demarrage des services
 cd /home
