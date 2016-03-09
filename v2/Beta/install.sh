@@ -146,4 +146,4 @@ cp -R /root/core-*/.htaccess /var/www/html/
 
 # redemarrage des services
 service cron restart
-systemctl restart apache2
+service apache2 start
