@@ -27,8 +27,8 @@ mv /tmp/apache2.conf /etc/apache2
 chmod 777 /dev/tty*
 apt-get update
 apt-get -y install locales
-dpkg-reconfigure tzdata
 dpkg-reconfigure locales
+dpkg-reconfigure tzdata
 apt-get -y upgrade
 apt-get -y install build-essential
 apt-get -y install Dialog
