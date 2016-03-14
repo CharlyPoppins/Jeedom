@@ -1,15 +1,18 @@
 #!/bin/sh
 #SFY alias stef74
 #Version jeedom 2.1.1 en chroot synology
-# dans le chroot
+#
+#Dans le chroot :
 #cd /tmp
 #wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install.sh
 #chmod+x install.sh
 #sh install.sh
-# Le port 8088 doit être non utilisé
-#De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
-# Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
-# Enocean don't work on 32bits
+#
+#Le port 8088 doit être non utilisé
+#De preférence un chroot tout neuf avec un reboot du Nas si chroot a deja été installé.
+#Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
+#
+#Enocean don't work on 32bits
 #Lors de l'install de apache repondre N a la question.
 
 #status sous syno de apache2 et demarrage des services
