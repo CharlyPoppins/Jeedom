@@ -7,19 +7,22 @@ sudo apt-get install git-core curl build-essential openssl libssl-dev
 cd /tmp
 
 # Récupèration NodeJs depuis Github
-git clone https://github.com/joyent/node.git
+# git clone https://github.com/joyent/node.git
+
 cd node
 
 # Récupération de la dernière version stable (actuellement 0.10.40)
 # git tag
-git checkout v0.10.40
+# git checkout v0.10.40
+curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
 # Compilation et Installation
-./configure
-make
-sudo make install
+# ./configure
+# make
+# sudo make install
 
-ln -s /usr/bin/nodejs /usr/bin/node
+# ln -s /usr/bin/nodejs /usr/bin/node
 
 # Vérification de la Version NodeJs
 node -v
