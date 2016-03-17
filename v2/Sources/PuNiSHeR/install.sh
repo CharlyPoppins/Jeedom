@@ -85,20 +85,20 @@ install_nodejs() {
     check_nodejs_version
     [ $? -eq 1 ] && return
     if [ -f /usr/bin/raspi-config ]; then
-        curl -sL https://deb.nodesource.com/setup_0.12 | bash -
-        apt-get -y install nodejs
+	curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+	sudo apt-get install -y nodejs
         ln -s /usr/bin/nodejs /usr/bin/node
     else
         if [  -z "$1" -a $(uname -a | grep cubox | wc -l ) -eq 1 -a ${ARCH} = "armv7l" ]; then
             apt-get -y install nodejs
             ln -s /usr/bin/nodejs /usr/bin/node
         else
-            curl -sL https://deb.nodesource.com/setup_0.10 | sudo bash -
-            apt-get -y install nodejs
+            curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+            sudo apt-get install -y nodejs
             ln -s /usr/bin/nodejs /usr/bin/node
         fi
     fi
-    apt-get -y install npm
+    curl -L https://www.npmjs.org/install.sh | sh
 }
 
 
