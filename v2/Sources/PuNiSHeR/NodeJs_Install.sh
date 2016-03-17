@@ -18,6 +18,8 @@ git checkout v0.10.40
 make
 sudo make install
 
+ln -s /usr/bin/nodejs /usr/bin/node
+
 # Vérification de la Version NodeJs
 node -v
 
