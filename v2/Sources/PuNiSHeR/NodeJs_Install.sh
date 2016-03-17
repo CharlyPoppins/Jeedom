@@ -11,6 +11,7 @@ git clone https://github.com/joyent/node.git
 cd node
 
 # Récupération de la dernière version stable (actuellement 0.10.40)
+# git tag
 git checkout v0.10.40
 
 # Compilation et Installation
