@@ -4,13 +4,15 @@
 #
 # Mise à jour des Paquets
 apt-get update
-apt-get install curl build-essential openssl libssl-dev
+apt-get install sudo curl build-essential openssl libssl-dev
 
 cd /tmp
 
 # Récupération de la dernière version stable
 curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
 apt-get install -y nodejs
+
+ln -s /usr/bin/nodejs /usr/bin/node
 
 # Vérification de la Version NodeJs
 node -v
