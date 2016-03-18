@@ -1,6 +1,8 @@
 #!/bin/bash
 
-apt-get install sudo
+apt-get update
+apt-get install sudo curl build-essential
+
 cd /tmp
 
 echo "Début de l'installation"
