@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get update
-apt-get install sudo curl build-essential
+apt-get install sudo locales curl build-essential
 
 cd /tmp
 
@@ -17,9 +17,9 @@ then
 else
   echo "KO, version obsolète à upgrader";
   echo "Suppression du Nodejs existant et installation du paquet recommandé"
-  sudo apt-get -y --purge autoremove nodejs npm
+  sudo apt-get -y --purge autoremove nodejs* npm*
   arch=`arch`;
-  echo 30 > /tmp/mySensors_dep
+
   if [[ $arch == "armv6l" ]]
   then
     echo "Raspberry 1 détecté, utilisation du paquet pour armv6"
