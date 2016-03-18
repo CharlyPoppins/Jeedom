@@ -1,5 +1,7 @@
 #!/bin/sh
-
+#
+# Exécuter le Script en root
+#
 # Mise à jour des Paquets
 sudo apt-get update
 sudo apt-get install curl build-essential openssl libssl-dev
