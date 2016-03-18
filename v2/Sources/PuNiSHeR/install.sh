@@ -14,7 +14,7 @@
 # Lors de l'install de apache repondre N a la question.
 
 install_msg_fr() {
-    msg_installer_welcome="*Bienvenue dans l'assistant d'intallation/mise à jour de Jeedom*"
+    msg_installer_welcome="*Bienvenue dans l'intallation de Jeedom sur Debian Chroot*"
     msg_usage1="Utilisation: $0 [<nom_du_webserver>]"
     msg_usage2="             nom_du_webserver peut être 'nginx' (par défaut)"
     msg_manual_install_nodejs_ARM="*        Installation manuelle de nodeJS pour ARM       *"
@@ -59,6 +59,31 @@ install_msg_fr() {
     msg_nginx_ssl_config="*                 NGINX SSL configuration               *"
 }
 
+########################## Helper functions ############################
+
+
+setup_i18n() {
+    lang=${LANG:=en_US}
+    case ${lang} in
+        [Ff][Rr]*)
+            install_msg_fr
+        ;;
+        [Ee][Nn]*|*)
+            install_msg_en
+        ;;
+        [De][De]*|*)
+            install_msg_de
+        ;;
+    esac
+}
+
+
+usage_help() {
+    echo "${msg_usage1}"
+    echo "${msg_usage2}"
+    exit 1
+}
+
 check_nodejs_version() {
     # Check if nodeJS v0.10.25 (or higher) is installed.
     # Return 1 of true, 0 (or else) otherwise
@@ -101,21 +126,6 @@ install_nodejs() {
     curl -L https://www.npmjs.org/install.sh | sh
 }
 
-
-# Status sous syno de apache2 et demarrage des services
-cd /home
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Sources/PuNiSHeR/jeedom.sh
-chmod +x jeedom.sh
-
-#recup config apache2 pour ne pas avoir de messages d'erreurs
-#Faut repondre N lors de la question à l'install de apache2
-cd /tmp
-mkdir /etc/apache2/
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Sources/PuNiSHeR/apache2.conf
-mv /tmp/apache2.conf /etc/apache2
-
-chmod 777 /dev/tty*
-
 install_dependency() {
 apt-get update
 apt-get -y install locales
@@ -152,6 +162,29 @@ install_nodejs
 apt-get autoremove
 }
 
+
+# Select the right language, among available ones
+setup_i18n
+
+echo "********************************************************"
+echo "${msg_installer_welcome}"
+echo "********************************************************"
+
+
+# Status sous syno de apache2 et demarrage des services
+cd /home
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Sources/PuNiSHeR/jeedom.sh
+chmod +x jeedom.sh
+
+#recup config apache2 pour ne pas avoir de messages d'erreurs
+#Faut repondre N lors de la question à l'install de apache2
+cd /tmp
+mkdir /etc/apache2/
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Sources/PuNiSHeR/apache2.conf
+mv /tmp/apache2.conf /etc/apache2
+
+chmod 777 /dev/tty*
+
 install_dependency
 	
 echo "export LANG=fr_FR.utf8" >> ~/.bashrc
@@ -163,7 +196,7 @@ echo "cd /home" >> ~/.bashrc
 cd /tmp
 
 #################################Perso########################################
-# on recupere la Version 2.1.1
+# on recupere la Version 2.1.2
 ###############################################################################
 service apache2 stop
 
