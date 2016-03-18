@@ -4,7 +4,7 @@
 #
 # Mise à jour des Paquets
 apt-get update
-apt-get install sudo locale curl build-essential
+apt-get install sudo locales curl build-essential
 
 cd /tmp
 
