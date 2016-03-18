@@ -15,7 +15,7 @@ cd /tmp
 curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
 apt-get install -y nodejs
 
-ln -s /usr/bin/nodejs /usr/bin/node
+ln -s /usr/local/n/versions/node/5.8.0/bin/node /usr/bin/node
 
 # Vérification de la Version NodeJs
 node -v
