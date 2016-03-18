@@ -32,6 +32,7 @@ else
     echo "Utilisation du dépot officiel"
     curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
     sudo apt-get install -y nodejs
+    ln -s /usr/local/bin/nodejs /usr/local/bin/node
   fi
   new=`nodejs -v`;
   echo "Version actuelle : ${new}"
