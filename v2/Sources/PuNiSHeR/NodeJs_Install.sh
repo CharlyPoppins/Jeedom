@@ -6,9 +6,6 @@
 apt-get update
 apt-get install sudo locale curl build-essential
 
-echo "export LANG=fr_FR.utf8" >> ~/.bashrc
-echo "export LC_ALL=fr_FR.utf8" >> ~/.bashrc
-
 cd /tmp
 
 # Récupération de la dernière version stable
