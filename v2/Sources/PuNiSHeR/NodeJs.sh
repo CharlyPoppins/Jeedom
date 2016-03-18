@@ -31,6 +31,7 @@ else
     rm node_latest_armhf.deb
   elif [[ $arch == "x86_64" ]]
   then
+    echo "Utilisation du Code Source"
     wget https://nodejs.org/dist/v5.9.0/node-v5.9.0.tar.gz
     tar -xvzf node-v5.9.0.tar.gz
     
