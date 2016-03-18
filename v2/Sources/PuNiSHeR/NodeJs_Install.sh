@@ -6,6 +6,9 @@
 apt-get update
 apt-get install sudo locale curl build-essential openssl libssl-dev
 
+echo "export LANG=fr_FR.utf8" >> ~/.bashrc
+echo "export LC_ALL=fr_FR.utf8" >> ~/.bashrc
+
 cd /tmp
 
 # Récupération de la dernière version stable
