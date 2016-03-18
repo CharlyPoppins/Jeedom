@@ -4,7 +4,7 @@
 #
 # Mise à jour des Paquets
 apt-get update
-apt-get install sudo locale curl build-essential openssl libssl-dev
+apt-get install sudo locale curl build-essential
 
 echo "export LANG=fr_FR.utf8" >> ~/.bashrc
 echo "export LC_ALL=fr_FR.utf8" >> ~/.bashrc
