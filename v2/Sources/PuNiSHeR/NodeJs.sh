@@ -18,6 +18,7 @@ else
   echo "KO, version obsolète à upgrader";
   echo "Suppression du Nodejs existant et installation du paquet recommandé"
   sudo apt-get -y --purge autoremove nodejs* npm*
+  
   arch=`arch`;
 
   if [[ $arch == "armv6l" ]]
@@ -28,11 +29,20 @@ else
     sudo dpkg -i node_latest_armhf.deb
     sudo ln -s /usr/local/bin/nodejs /usr/local/bin/node
     rm node_latest_armhf.deb
+  elif [[ $arch == "x86_64" ]]
+  then
+    wget https://nodejs.org/dist/v5.9.0/node-v5.9.0.tar.gz
+    tar -xvzf node-v5.9.0.tar.gz
+    
+    cd node-v5.9.0
+    
+    ./configure
+    make
+    sudo make install
   else
     echo "Utilisation du dépot officiel"
     curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
     sudo apt-get install -y nodejs
-    ln -s /usr/local/bin/nodejs /usr/local/bin/node
   fi
   new=`nodejs -v`;
   echo "Version actuelle : ${new}"
