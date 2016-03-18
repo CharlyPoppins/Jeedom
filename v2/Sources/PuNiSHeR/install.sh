@@ -197,7 +197,7 @@ cd /tmp
 
 #################################Perso########################################
 # on recupere la Version 2.1.2
-###############################################################################
+##############################################################################
 service apache2 stop
 
 wget https://raw.githubusercontent.com/jeedom/core/stable/install/apache_security -O /etc/apache2/conf-available/security.conf
