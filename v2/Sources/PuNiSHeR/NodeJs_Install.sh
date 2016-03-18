@@ -4,7 +4,7 @@
 #
 # Mise à jour des Paquets
 apt-get update
-apt-get install sudo curl build-essential openssl libssl-dev
+apt-get install sudo locale curl build-essential openssl libssl-dev
 
 cd /tmp
 
