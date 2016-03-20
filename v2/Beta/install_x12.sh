@@ -126,7 +126,7 @@ dpkg-query -l apache2 > /dev/null;
 if $? = "0"; then
 	echo "Apache2 détecté, suppression en Cours...";
 	service apache2 stop
-	apt-get autoremove --purge apache2
+	apt-get -y autoremove --purge apache2
 fi
 
 if [ -d "/etc/apache2" ];then
