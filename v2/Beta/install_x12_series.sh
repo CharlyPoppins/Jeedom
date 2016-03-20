@@ -25,7 +25,7 @@
 #Faut repondre N lors de la question à l'install de apache2
 cd /tmp
 mkdir /etc/apache2/
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/apache2.conf
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/apache2_x12.conf
 mv /tmp/apache2_x12.conf /etc/apache2/apache2.conf
 
 chmod 777 /dev/tty*
