@@ -91,10 +91,6 @@ apt-get -y install ca-certificates
 configure_nginx() {
 echo -n "${msg_question_port}"
 read answer
-if [ "$answer" -eq ""]|| [ "$answer" -eq "80"]; then
-echo " ne pas utiliser ce port, try again"
-configure_nginx
-else
 echo "Changement de Port en Cours...";
 sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
 sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
