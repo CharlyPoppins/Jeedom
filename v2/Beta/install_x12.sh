@@ -10,7 +10,7 @@
 # wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install_x12.sh
 # chmod+x install_x12.sh
 # sh install_x12.sh
-# Le port 8088 doit être non utilisé
+#
 # De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
 # Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
 # Enocean don't work on 32bits
@@ -35,18 +35,21 @@ setup_i18n() {
 install_msg_fr() {
     msg_installer_welcome="*Bienvenue dans l'intallation de Jeedom sur Debian Chroot*"
     msg_answer_yesno="Répondez oui ou non"
+	msg_question_port="Quel Port désirez-vous utiliser ? "
 }
 
 
 install_msg_en() {
     msg_installer_welcome="*      Welcome to the Jeedom installer/updater        *"
     msg_answer_yesno="Answer yes or no"
+	msg_question_port="Quel Port désirez-vous utiliser ? "
 }
 
 
 install_msg_de() {
     msg_installer_welcome="*      Willkommen beim Jeedom Installer / Updater        *"
     msg_answer_yesno="Antwort ja oder nein"
+	msg_question_port="Quel Port désirez-vous utiliser ? "
 }
 
 
@@ -85,13 +88,17 @@ apt-get -y install ca-certificates
 }
 
 
-config_nginx() {
-sed -i 's/listen 80 default_server;/listen 80 default_server;/g' /etc/php5/apache2/php.ini
+configure_nginx() {
+while [ -z ${port[$i]} ]; do
+echo "${msg_question_port}"
+read port[$i]
+done
+
 
 }
 
 
-config_php() {
+configure_php() {
 #sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/apache2/php.ini
 #sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/apache2/php.ini
 #sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/apache2/php.ini
@@ -101,12 +108,67 @@ config_php() {
 }
 
 
-# Select the right language, among available ones
+# Selection de la Langue
 setup_i18n
+
 
 echo "********************************************************"
 echo "${msg_installer_welcome}"
 echo "********************************************************"
+
+
+# Installation des dépandences
+install_dependency
+
+
+# Vérification de la présence de Apache2
+dpkg-query -l apache2 > /dev/null;
+	
+if $? = "0"; then
+	echo "Apache2 détecté, suppression en Cours...";
+	service apache2 stop
+	apt-get autoremove --purge apache2
+fi
+
+if [ -d "/etc/apache2" ];then
+	echo "Dossier Apache2 détecté, suppression en Cours...";
+	rm -Rf /etc/apache2
+fi
+
+if [ -d "/var/www/html" ];then
+	echo "Dossier HTML détecté, suppression en Cours...";
+	rm -Rf /var/www/html
+fi
+
+
+# Installation du Serveur Web
+install_webserver
+
+
+# On se place dans le dossier TMP
+cd /tmp
+
+
+# Modification du Fichier config de Nginx
+rm /etc/nginx/default
+
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
+
+mv nginx_x12.conf /etc/nginx/default
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Status sous syno de Nginx et demarrage des services
@@ -131,9 +193,6 @@ echo "cd /home" >> ~/.bashrc
 # On se place dans le repertoire de travail
 cd /tmp
 
-# Arret Service Apache pour déinstallation si présent
-service apache2 stop
-apt-get autoremove --purge apache2
 
 
 
