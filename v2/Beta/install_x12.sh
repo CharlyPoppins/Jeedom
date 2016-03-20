@@ -8,7 +8,7 @@
 # Dans le chroot :
 # cd /tmp
 # wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install_x12.sh
-# chmod+x install_mini.sh
+# chmod+x install_x12.sh
 # sh install_x12.sh
 # Le port 8088 doit être non utilisé
 # De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
