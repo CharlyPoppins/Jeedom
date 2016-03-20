@@ -94,7 +94,7 @@ read answer
 echo "Changement de Port en Cours...";
 sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
 sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
-fi
+
 echo "Redemarrage de Nginx...";
 service nginx stop
 service nginx start
