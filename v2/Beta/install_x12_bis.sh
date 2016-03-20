@@ -94,6 +94,7 @@ read answer
 echo "Changement de Port en Cours...";
 sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
 sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 echo "Redemarrage de Nginx...";
 service nginx stop
 service nginx start
@@ -162,7 +163,7 @@ rm /etc/nginx/default
 
 wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
 
-mv nginx_x12.conf /etc/nginx/default
+mv nginx_x12.conf /etc/nginx/sites-enabled/default
 
 
 # Configuration Port Nginx
