@@ -62,7 +62,6 @@ apt-get -y install node
 apt-get -y install node-normalize-package-data
 apt-get -y install node-request
 apt-get -y install python-requests
-
 apt-get -y install nodejs
 apt-get -y install ntp
 apt-get -y install php5-common libapache2-mod-php5 php5-cli
@@ -78,8 +77,6 @@ apt-get -y install python-serial
 apt-get -y install systemd
 apt-get -y install unzip
 apt-get -y install usb-modeswitch
-apt-get -y install ffmpeg
-apt-get -y install avconv
 apt-get -y install libudev1
 apt-get -y install ca-certificates
 apt-get -y install htop
