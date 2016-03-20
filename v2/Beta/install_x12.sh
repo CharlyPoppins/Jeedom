@@ -111,13 +111,19 @@ done
 setup_i18n
 
 
-echo "********************************************************"
+echo "**********************************************************"
 echo "${msg_installer_welcome}"
-echo "********************************************************"
+echo "**********************************************************"
 
 
 # Installation des dépandences
 install_dependency
+
+
+echo "export LANG=fr_FR.utf8" >> ~/.bashrc
+echo "export LC_ALL=fr_FR.utf8" >> ~/.bashrc
+
+echo "cd /home" >> ~/.bashrc
 
 
 # Vérification de la présence de Apache2
@@ -177,22 +183,6 @@ wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom
 mv jeedom_x12.sh jeedom.sh
 chmod +x jeedom.sh
 
-#recup config apache2 pour ne pas avoir de messages d'erreurs
-#Faut repondre N lors de la question à l'install de apache2
-cd /tmp
-# mkdir /etc/apache2/
-# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/apache2_x12.conf
-# mv /tmp/apache2_x12.conf /etc/apache2/apache2.conf
-
-echo "export LANG=fr_FR.utf8" >> ~/.bashrc
-echo "export LC_ALL=fr_FR.utf8" >> ~/.bashrc
-
-echo "cd /home" >> ~/.bashrc
-
-# On se place dans le repertoire de travail
-cd /tmp
-
-
 
 
 #wget https://raw.githubusercontent.com/jeedom/core/stable/install/apache_security -O /etc/apache2/conf-available/security.conf
@@ -201,12 +191,6 @@ cd /tmp
 
 #rm /var/www/html/index.html
 
-#config apache2
-#sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/apache2/php.ini
-#sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/apache2/php.ini
-#sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/apache2/php.ini
-#sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/apache2/php.ini
-#sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
 
 
 #config des droits	
@@ -214,8 +198,8 @@ echo "www-data ALL=(ALL) NOPASSWD: ALL" | (EDITOR="tee -a" visudo)
 
 #droits jeedom
 sudo chown -R www-data:www-data /var/www/html
-sudo chmod -R 775 /var/www/html
+#sudo chmod -R 775 /var/www/html
 
 # redemarrage des services
 
-service cron restart
+#service cron restart
