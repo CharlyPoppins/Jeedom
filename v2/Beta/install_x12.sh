@@ -71,10 +71,9 @@ apt-get -y install nano
 
 
 install_webserver() {
-apt-get install mysql-server 
-apt-get install mysql-client
+apt-get -y install mysql-client
 apt-get -y install nginx
-apt-get install php5-fpm
+apt-get -y install php5-fpm
 apt-get -y install php5-curl
 apt-get -y install php5-dev
 apt-get -y install php5-json
@@ -160,4 +159,4 @@ sudo chmod -R 775 /var/www/html
 
 # redemarrage des services
 
-service apache2 start
+service cron restart
