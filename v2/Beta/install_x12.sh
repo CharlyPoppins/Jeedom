@@ -16,6 +16,40 @@
 # Enocean don't work on 32bits
 # Lors de l'install de apache repondre N a la question.
 
+setup_i18n() {
+    lang=${LANG:=en_US}
+    case ${lang} in
+        [Ff][Rr]*)
+            install_msg_fr
+        ;;
+        [Ee][Nn]*|*)
+            install_msg_en
+        ;;
+        [De][De]*|*)
+            install_msg_de
+        ;;
+    esac
+}
+
+
+install_msg_fr() {
+    msg_installer_welcome="*Bienvenue dans l'intallation de Jeedom sur Debian Chroot*"
+    msg_answer_yesno="Répondez oui ou non"
+}
+
+
+install_msg_en() {
+    msg_installer_welcome="*      Welcome to the Jeedom installer/updater        *"
+    msg_answer_yesno="Answer yes or no"
+}
+
+
+install_msg_de() {
+    msg_installer_welcome="*      Willkommen beim Jeedom Installer / Updater        *"
+    msg_answer_yesno="Antwort ja oder nein"
+}
+
+
 install_dependency() {
 chmod 777 /dev/tty*
 apt-get update
@@ -35,6 +69,7 @@ apt-get -y install htop
 apt-get -y install nano
 }
 
+
 install_webserver() {
 apt-get install mysql-server 
 apt-get install mysql-client
@@ -49,6 +84,31 @@ apt-get -y install php5-gd
 apt-get -y install php-pear
 apt-get -y install ca-certificates
 }
+
+
+config_nginx() {
+sed -i 's/listen 80 default_server;/listen 80 default_server;/g' /etc/php5/apache2/php.ini
+
+}
+
+
+config_php() {
+#sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/apache2/php.ini
+#sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/apache2/php.ini
+#sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/apache2/php.ini
+#sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/apache2/php.ini
+#sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
+
+}
+
+
+# Select the right language, among available ones
+setup_i18n
+
+echo "********************************************************"
+echo "${msg_installer_welcome}"
+echo "********************************************************"
+
 
 # Status sous syno de Nginx et demarrage des services
 cd /home
