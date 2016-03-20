@@ -94,7 +94,8 @@ echo "${msg_question_port}"
 read port[$i]
 done
 
-
+sed -i 's/listen 80 default_server;/listen ${port[$i]} default_server;/g' /etc/nginx/sites-enabled/default
+sed -i 's/listen [::]:80 default_server;/listen [::]:${port[$i]} default_server;/g' /etc/nginx/sites-enabled/default
 }
 
 
@@ -160,6 +161,10 @@ rm /etc/nginx/default
 wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
 
 mv nginx_x12.conf /etc/nginx/default
+
+
+# Configuration Port Nginx
+configure_nginx
 
 
 
