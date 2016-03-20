@@ -97,8 +97,7 @@ sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/n
 sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
 
 echo "Redemarrage de Nginx...";
-
-service nginx start
+service nginx restart
 }
 
 
