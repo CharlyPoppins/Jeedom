@@ -159,11 +159,17 @@ cd /tmp
 
 
 # Modification du Fichier config de Nginx
-rm /etc/nginx/default
+kdir -p /var/www/html/log
+sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/fpm/php.ini
+sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/fpm/php.ini
+sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/fpm/php.ini
+sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/fpm/php.ini
+sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
+rm /etc/nginx/sites-available/default
+rm /etc/nginx/sites-enabled/default
+wget https://raw.githubusercontent.com/jeedom/core/stable/install/nginx_default -O /etc/nginx/sites-available/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
-
-mv nginx_x12.conf /etc/nginx/sites-enabled/default
 
 
 # Configuration Port Nginx
