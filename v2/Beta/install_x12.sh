@@ -129,22 +129,23 @@ echo "cd /home" >> ~/.bashrc
 
 # Vérification de la présence de Apache2
 dpkg-query -l apache2 > /dev/null;
-	
-if $? = "0"; then
-	echo "Apache2 détecté, suppression en Cours...";
+
+if [ $? -eq 0 ] ; then
+	echo "Apache2 detecte, suppression en Cours...";
 	service apache2 stop
 	apt-get -y autoremove --purge apache2
 fi
 
 if [ -d "/etc/apache2" ];then
-	echo "Dossier Apache2 détecté, suppression en Cours...";
+	echo "Dossier Apache2 detecte, suppression en Cours...";
 	rm -Rf /etc/apache2
 fi
 
 if [ -d "/var/www/html" ];then
-	echo "Dossier HTML détecté, suppression en Cours...";
+	echo "Dossier HTML detecte, suppression en Cours...";
 	rm -Rf /var/www/html
 fi
+
 
 
 # Installation du Serveur Web
