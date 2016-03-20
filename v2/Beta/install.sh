@@ -55,13 +55,6 @@ apt-get -y install cython
 apt-get -y install docutils-common
 apt-get -y install javascript-common
 apt-get -y install locate
-apt-get -y install libarchive-dev
-apt-get -y install libav-tools
-apt-get -y install libjsoncpp-dev
-apt-get -y install libpcre3-dev
-apt-get -y install libssh2-php
-apt-get -y install libtinyxml-dev
-apt-get -y install libxml2
 apt-get -y install mercurial-common
 apt-get -y install mysql-client-5.5
 apt-get -y install ncurses-term
