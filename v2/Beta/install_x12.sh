@@ -112,7 +112,8 @@ echo "********************************************************"
 # Status sous syno de Nginx et demarrage des services
 cd /home
 
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/jeedom.sh
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/jeedom_x12.sh
+mv jeedom_x12.sh jeedom.sh
 chmod +x jeedom.sh
 
 #recup config apache2 pour ne pas avoir de messages d'erreurs
