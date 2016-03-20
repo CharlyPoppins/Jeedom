@@ -89,13 +89,16 @@ apt-get -y install ca-certificates
 
 
 configure_nginx() {
-while [ -z ${port[$i]} ]; do
-echo "${msg_question_port}"
-read port[$i]
-done
+echo -n "${msg_question_port}"
+read answer
 
-sed -i 's/listen 80 default_server;/listen ${port[$i]} default_server;/g' /etc/nginx/sites-enabled/default
-sed -i 's/listen [::]:80 default_server;/listen [::]:${port[$i]} default_server;/g' /etc/nginx/sites-enabled/default
+echo "Changement de Port en Cours...";
+sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
+sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
+
+echo "Redemarrage de Nginx...";
+
+service nginx start
 }
 
 
