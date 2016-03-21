@@ -77,8 +77,6 @@ apt-get -y install ntp
 install_webserver() {
 apt-get -y install mysql-client
 apt-get -y install nginx
-#apt-get -y install -y nginx-common
-#apt-get -y install -y nginx-full
 apt-get -y install php5-fpm
 apt-get -y install php5-curl
 apt-get -y install php5-dev
@@ -102,15 +100,6 @@ fi
 
 
 configure_nginx() {
-if [ -f '/etc/nginx/sites-available/defaults' ] ; then
-	rm /etc/nginx/sites-available/default
-fi
-
-cd /tmp
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
-
-mv nginx_x12.conf /etc/nginx/sites-available/default
-
 echo ""; echo "";
 echo -n "Quel Port desirez vous ? "
 read answer
@@ -141,7 +130,7 @@ then
 		chmod 777 /etc/nginx/sites-available/jeedom_dynamic_rule
 
 		echo "Redemarrage de Nginx...";
-		service nginx stop
+
 		service nginx start
 		
 		update-rc.d nginx defaults
@@ -198,6 +187,14 @@ echo "**********************************************************"
 echo ""; echo "";
 
 
+# Vérification qu'on est bien en root
+if [ $(id -u) != 0 ] ; then
+    echo "Super-user (root) privileges are required to install Jeedom"
+    echo "Please run 'sudo $0' or log in as root, and rerun $0"
+    exit 1
+fi
+
+
 # Installation des dépandences
 install_dependency
 
@@ -217,6 +214,17 @@ install_webserver
 
 
 # Configuration Port Virtualhost Nginx
+if [ -f '/etc/nginx/sites-available/defaults' ] ; then
+	rm /etc/nginx/sites-available/default
+fi
+
+cd /tmp
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
+
+service nginx stop
+
+mv nginx_x12.conf /etc/nginx/sites-available/default
+
 configure_nginx
 
 
