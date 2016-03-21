@@ -87,15 +87,15 @@ apt-get -y install php5-gd
 apt-get -y install php-pear
 apt-get -y install ca-certificates
 
-pecl install oauth
-if [ $? -eq 0 ] ; then
-	for i in fpm cli ; do
-		PHP_OAUTH="`cat /etc/php5/${i}/php.ini | grep -e 'oauth.so'`"
-		if [ -z "${PHP_OAUTH}" ] ; then
-			echo "extension=oauth.so" >> /etc/php5/${i}/php.ini
-		fi
-	done
-fi
+# pecl install oauth
+# if [ $? -eq 0 ] ; then
+# 	for i in fpm cli ; do
+# 		PHP_OAUTH="`cat /etc/php5/${i}/php.ini | grep -e 'oauth.so'`"
+# 		if [ -z "${PHP_OAUTH}" ] ; then
+# 			echo "extension=oauth.so" >> /etc/php5/${i}/php.ini
+# 		fi
+# 	done
+# fi
 }
 
 
@@ -170,10 +170,11 @@ fi
 
 
 configure_php() {
-sed -i 's/max_execution_time = 30/max_execution_time = 300/g' /etc/php5/fpm/php.ini
+sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/fpm/php.ini
 sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/fpm/php.ini
 sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/fpm/php.ini
 sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/fpm/php.ini
+sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
 }
 
 
