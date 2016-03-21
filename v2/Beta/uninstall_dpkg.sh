@@ -1,6 +1,5 @@
 #!/bin/sh
 
-apt-get -y upgrade
 apt-get -y autoremove --purge build-essential
 apt-get -y autoremove --purge Dialog
 apt-get -y autoremove --purge curl
