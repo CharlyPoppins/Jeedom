@@ -92,14 +92,52 @@ configure_nginx() {
 echo -n "${msg_question_port}"
 read answer
 
+if [ $answer = "" ] || [ $answer = "80" ]; then
+	echo "Vous ne pouvez pas laisser le Port vide ou utiliser le Port 80.";
+	configure_nginx
+else
+	echo "Vous avez choisi le Port : ";
+	echo "Changement de Port en Cours...";
+	sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
+	sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
+
+	echo "Redemarrage de Nginx...";
+	service nginx stop
+	service nginx start
+fi
+
 echo "Changement de Port en Cours...";
 sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
 sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
+
+cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
 
 echo "Redemarrage de Nginx...";
 service nginx stop
 service nginx start
 }
+
+
+delete_apache2() {
+dpkg-query -l apache2 > /dev/null;
+
+if [ $? -eq 0 ] ; then
+	echo "Apache2 detecte, suppression en Cours...";
+	service apache2 stop
+	apt-get -y autoremove --purge apache2
+fi
+
+if [ -d "/etc/apache2" ];then
+	echo "Dossier Apache2 detecte, suppression en Cours...";
+	rm -Rf /etc/apache2
+fi
+
+if [ -d "/var/www/html" ];then
+	echo "Dossier HTML detecte, suppression en Cours...";
+	rm -Rf /var/www/html
+fi
+}
+
 
 
 #configure_php() {
@@ -131,24 +169,7 @@ echo "cd /home" >> ~/.bashrc
 
 
 # Vérification de la présence de Apache2
-dpkg-query -l apache2 > /dev/null;
-
-if [ $? -eq 0 ] ; then
-	echo "Apache2 detecte, suppression en Cours...";
-	service apache2 stop
-	apt-get -y autoremove --purge apache2
-fi
-
-if [ -d "/etc/apache2" ];then
-	echo "Dossier Apache2 detecte, suppression en Cours...";
-	rm -Rf /etc/apache2
-fi
-
-if [ -d "/var/www/html" ];then
-	echo "Dossier HTML detecte, suppression en Cours...";
-	rm -Rf /var/www/html
-fi
-
+delete_apache2
 
 
 # Installation du Serveur Web
