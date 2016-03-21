@@ -162,10 +162,11 @@ sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/fpm/php.ini
 # Selection de la Langue
 setup_i18n
 
-
+echo ""; echo "";
 echo "**********************************************************"
 echo "${msg_installer_welcome}"
 echo "**********************************************************"
+echo ""; echo "";
 
 
 # Installation des dépandences
@@ -246,6 +247,7 @@ unzip -q /tmp/jeedom.zip -d /root/
 cp -R /root/core-*/* /var/www/html/
 cp -R /root/core-*/.htaccess /var/www/html/
 
+rm /tmp/jeedom.zip
 
 # redemarrage des services
 service cron restart
