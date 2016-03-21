@@ -76,8 +76,8 @@ apt-get -y install nano
 install_webserver() {
 apt-get -y install mysql-client
 apt-get -y install nginx
-#apt-get install -y nginx-common
-#apt-get install -y nginx-full
+#apt-get -y install -y nginx-common
+#apt-get -y install -y nginx-full
 apt-get -y install php5-fpm
 apt-get -y install php5-curl
 apt-get -y install php5-dev
@@ -101,6 +101,15 @@ fi
 
 
 configure_nginx() {
+if [ -f '/etc/nginx/sites-available/defaults' ] ; then
+	rm /etc/nginx/sites-available/default
+fi
+
+cd /tmp
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
+
+mv nginx_x12.conf /etc/nginx/sites-available/default
+
 echo ""; echo "";
 echo -n "Quel Port desirez vous ? "
 read answer
@@ -113,26 +122,22 @@ then
 		echo "Veuillez en choisir une autre.";
 		configure_nginx
 	else
-		if [ -f '/etc/nginx/sites-available/defaults' ] ; then
-			rm /etc/nginx/sites-available/default
-		fi
-
-		cd /tmp
-		wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
-
-		mv nginx_x12.conf /etc/nginx/sites-available/default
-
 		echo ""; echo "";
 		echo "Vous avez choisi le Port : "$answer;
 		echo "Changement de Port en Cours...";
 		echo ""; echo "";
 		sed -i 's/#listen   80;/listen '"$answer"'/g' /etc/nginx/sites-available/default
-		sed -i 's/#listen  \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/nginx/sites-available/default
+		sed -i 's/#listen   \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/nginx/sites-available/default
 
 		if [ -f '/etc/nginx/sites-enabled/default' ] ; then
 			rm /etc/nginx/sites-enabled/default
 			cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 		fi
+
+		if [ ! -f '/etc/nginx/sites-available/jeedom_dynamic_rule' ] ; then
+			touch /etc/nginx/sites-available/jeedom_dynamic_rule
+		fi
+		chmod 777 /etc/nginx/sites-available/jeedom_dynamic_rule
 
 		echo "Redemarrage de Nginx...";
 		service nginx stop
