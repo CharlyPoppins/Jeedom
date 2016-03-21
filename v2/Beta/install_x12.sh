@@ -89,32 +89,41 @@ apt-get -y install ca-certificates
 
 
 configure_nginx() {
-echo -n "${msg_question_port}"
+echo ""; echo "";
+echo -n "Quel Port desirez vous ? "
 read answer
 
-if [ $answer = "" ] || [ $answer = "80" ]; then
-	echo "Vous ne pouvez pas laisser le Port vide ou utiliser le Port 80.";
-	configure_nginx
+if [ "$(echo $answer | grep "^[ [:digit:] ]*$")" ]
+then
+        if [ $answer -eq 80 ]; then
+                echo ""; echo "";
+                echo "Le Port 80 est deja utilise sur le Synology...";
+                echo "Veuillez en choisir une autre.";
+                configure_nginx
+        else
+                echo ""; echo "";
+                echo "Vous avez choisi le Port : "$answer;
+                echo "Changement de Port en Cours...";
+                echo ""; echo "";
+                sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-en$
+                sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g'$
+
+                cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
+
+                echo "Redemarrage de Nginx...";
+                service nginx stop
+                service nginx start
+        fi
+elif [ -z $answer ]; then
+                echo ""; echo "";
+                echo "Vous ne pouvez pas laisser le Port vide...";
+                configure_nginx
 else
-	echo "Vous avez choisi le Port : ";
-	echo "Changement de Port en Cours...";
-	sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
-	sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
-
-	echo "Redemarrage de Nginx...";
-	service nginx stop
-	service nginx start
+        echo ""; echo "";
+        echo "Vous avez introduit : "$answer;
+        echo "Veuillez introduire que des chiffres.";
+        configure_nginx
 fi
-
-echo "Changement de Port en Cours...";
-sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
-sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
-
-cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
-
-echo "Redemarrage de Nginx...";
-service nginx stop
-service nginx start
 }
 
 

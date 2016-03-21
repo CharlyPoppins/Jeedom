@@ -2,6 +2,7 @@
 
 apt-get -y autoremove --purge build-essential
 apt-get -y autoremove --purge Dialog
+apt-get -y autoremove --purge nginx
 apt-get -y autoremove --purge curl
 apt-get -y autoremove --purge make
 apt-get -y autoremove --purge mc
