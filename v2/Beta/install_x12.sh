@@ -87,6 +87,16 @@ apt-get -y install php5-ldap
 apt-get -y install php5-gd
 apt-get -y install php-pear
 apt-get -y install ca-certificates
+
+pecl install oauth
+if [ $? -eq 0 ] ; then
+	for i in fpm cli ; do
+		PHP_OAUTH="`cat /etc/php5/${i}/php.ini | grep -e 'oauth.so'`"
+		if [ -z "${PHP_OAUTH}" ] ; then
+			echo "extension=oauth.so" >> /etc/php5/${i}/php.ini
+		fi
+	done
+fi
 }
 
 
@@ -107,15 +117,17 @@ then
 		echo "Vous avez choisi le Port : "$answer;
 		echo "Changement de Port en Cours...";
 		echo ""; echo "";
-		sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
-		sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
-		sed -i 's/index index.html index.htm index.nginx-debian.html;/index index.html index.htm index.php;/g' /etc/nginx/sites-enabled/default
+		sed -i 's/#listen   80;/listen '"$answer"'/g' /etc/nginx/sites-enabled/default
+		sed -i 's/#listen  \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/nginx/sites-enabled/default
+		#sed -i 's/index index.html index.htm index.nginx-debian.html;/index index.html index.htm index.php;/g' /etc/nginx/sites-enabled/default
 
 		cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
 
 		echo "Redemarrage de Nginx...";
 		service nginx stop
 		service nginx start
+		
+		update-rc.d nginx defaults
 	fi
 elif [ -z $answer ]; then
 	echo ""; echo "";
