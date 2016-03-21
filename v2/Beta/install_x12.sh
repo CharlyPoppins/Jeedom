@@ -36,6 +36,9 @@ install_msg_fr() {
     msg_installer_welcome="*Bienvenue dans l'intallation de Jeedom sur Debian Chroot*"
     msg_answer_yesno="Répondez oui ou non"
 	msg_question_port="Quel Port désirez-vous utiliser ? "
+	msg_check_right="*       Controle des Droits sur les Dossiers          *"
+	msg_dir_jeedom="Repertoir Jeedom..."
+	msg_dir_cache="Repertoir Cache..."
 }
 
 
@@ -43,6 +46,9 @@ install_msg_en() {
     msg_installer_welcome="*      Welcome to the Jeedom installer/updater        *"
     msg_answer_yesno="Answer yes or no"
 	msg_question_port="Quel Port désirez-vous utiliser ? "
+	msg_check_right="*       Controle des Droits sur les Dossiers          *"
+	msg_dir_jeedom="Repertoir Jeedom..."
+	msg_dir_cache="Repertoir Cache..."
 }
 
 
@@ -50,6 +56,9 @@ install_msg_de() {
     msg_installer_welcome="*      Willkommen beim Jeedom Installer / Updater        *"
     msg_answer_yesno="Antwort ja oder nein"
 	msg_question_port="Quel Port désirez-vous utiliser ? "
+	msg_check_right="*       Controle des Droits sur les Dossiers          *"
+	msg_dir_jeedom="Repertoir Jeedom..."
+	msg_dir_cache="Repertoir Cache..."
 }
 
 
@@ -178,6 +187,28 @@ sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.c
 }
 
 
+check_right() {
+echo ""; echo "";
+echo "**********************************************************"
+echo "${msg_check_right}"
+echo "**********************************************************"
+echo ""; echo "";
+sudo chown -R www-data:www-data /var/www/html
+
+echo "${msg_dir_jeedom}"
+echo -n "[$(date +%d-%m-%Y\ %H:%M:%S)] Dossier Jeedom..."
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod 775 -R /var/www/html
+echo "OK"
+
+echo "${msg_dir_cache}"
+echo -n "[$(date +%d-%m-%Y\ %H:%M:%S)] Dossier Cache..."
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod 775 -R /tmp/jeedom-cache
+echo "OK"
+}
+
+
 # Selection de la Langue
 setup_i18n
 
@@ -259,10 +290,8 @@ cronjob="* * * * * $croncmd"
 ( crontab -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -
 
 
-#droits jeedom
-sudo chown -R www-data:www-data /var/www/html
-sudo chmod -R 775 /var/www/html
-sudo chmod -R 775 /tmp/jeedom-cache
+#Changement des droits
+check_right
 
 service php5-fpm restart
 
