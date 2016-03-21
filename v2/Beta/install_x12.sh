@@ -109,6 +109,7 @@ then
 		echo ""; echo "";
 		sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
 		sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
+		sed -i 's/index index.html index.htm index.nginx-debian.html;/index index.html index.htm index.php;/g' /etc/nginx/sites-enabled/default
 
 		cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
 
@@ -150,14 +151,12 @@ fi
 }
 
 
-
-#configure_php() {
-#sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/apache2/php.ini
-#sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/apache2/php.ini
-#sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/apache2/php.ini
-#sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/apache2/php.ini
-#sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
-#}
+configure_php() {
+sed -i 's/max_execution_time = 30/max_execution_time = 300/g' /etc/php5/fpm/php.ini
+sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/fpm/php.ini
+sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/fpm/php.ini
+sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/fpm/php.ini
+}
 
 
 # Selection de la Langue
@@ -203,6 +202,10 @@ mv nginx_x12.conf /etc/nginx/default
 configure_nginx
 
 
+# Configuration de PHP
+configure_php
+
+
 # Status sous syno de Nginx et demarrage des services Jeedom
 cd /home
 
@@ -218,13 +221,6 @@ service nginx stop
 
 rm /var/www/html/index.html
 
-#config apache2
-#sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/apache2/php.ini
-#sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/apache2/php.ini
-#sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/apache2/php.ini
-#sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/apache2/php.ini
-#sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
-
 
 #config des droits	
 echo "www-data ALL=(ALL) NOPASSWD: ALL" | (EDITOR="tee -a" visudo)
@@ -235,9 +231,12 @@ croncmd="su --shell=/bin/bash - www-data -c '/usr/bin/php /var/www/html/core/php
 cronjob="* * * * * $croncmd"
 ( crontab -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -
 
+
 #droits jeedom
 sudo chown -R www-data:www-data /var/www/html
 sudo chmod -R 775 /var/www/html
+
+service php5-fpm restart
 
 #d'apres la doc jeedom
 mkdir -p /var/www/html
@@ -246,6 +245,7 @@ wget https://github.com/jeedom/core/archive/stable.zip -O /tmp/jeedom.zip
 unzip -q /tmp/jeedom.zip -d /root/
 cp -R /root/core-*/* /var/www/html/
 cp -R /root/core-*/.htaccess /var/www/html/
+
 
 # redemarrage des services
 service cron restart
