@@ -262,6 +262,7 @@ cronjob="* * * * * $croncmd"
 #droits jeedom
 sudo chown -R www-data:www-data /var/www/html
 sudo chmod -R 775 /var/www/html
+sudo chmod -R 775 /tmp/jeedom-cache
 
 service php5-fpm restart
 
@@ -277,4 +278,4 @@ rm /tmp/jeedom.zip
 
 # redemarrage des services
 service cron restart
-service nginx start
+service nginx restart
