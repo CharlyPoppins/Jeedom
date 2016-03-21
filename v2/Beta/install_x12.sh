@@ -113,15 +113,26 @@ then
 		echo "Veuillez en choisir une autre.";
 		configure_nginx
 	else
+		if [ -f '/etc/nginx/sites-available/defaults' ] ; then
+			rm /etc/nginx/sites-available/default
+		fi
+
+		cd /tmp
+		wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
+
+		mv nginx_x12.conf /etc/nginx/sites-available/default
+
 		echo ""; echo "";
 		echo "Vous avez choisi le Port : "$answer;
 		echo "Changement de Port en Cours...";
 		echo ""; echo "";
-		sed -i 's/#listen   80;/listen '"$answer"'/g' /etc/nginx/sites-enabled/default
-		sed -i 's/#listen  \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/nginx/sites-enabled/default
-		#sed -i 's/index index.html index.htm index.nginx-debian.html;/index index.html index.htm index.php;/g' /etc/nginx/sites-enabled/default
+		sed -i 's/#listen   80;/listen '"$answer"'/g' /etc/nginx/sites-available/default
+		sed -i 's/#listen  \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/nginx/sites-available/default
 
-		cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
+		if [ -f '/etc/nginx/sites-enabled/default' ] ; then
+			rm /etc/nginx/sites-enabled/default
+			cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+		fi
 
 		echo "Redemarrage de Nginx...";
 		service nginx stop
@@ -197,18 +208,6 @@ delete_apache2
 
 # Installation du Serveur Web
 install_webserver
-
-
-# On se place dans le dossier TMP
-cd /tmp
-
-
-# Modification du Fichier config de Nginx
-rm /etc/nginx/default
-
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
-
-mv nginx_x12.conf /etc/nginx/default
 
 
 # Configuration Port Virtualhost Nginx
