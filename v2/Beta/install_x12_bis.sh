@@ -165,29 +165,11 @@ sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/fpm/php
 sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/fpm/php.ini
 sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/fpm/php.ini
 sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
-rm /etc/nginx/sites-available/default
-rm /etc/nginx/sites-enabled/default
-wget https://raw.githubusercontent.com/jeedom/core/stable/install/nginx_default -O /etc/nginx/sites-available/default
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 
 
 # Configuration Port Nginx
 configure_nginx
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Status sous syno de Nginx et demarrage des services
