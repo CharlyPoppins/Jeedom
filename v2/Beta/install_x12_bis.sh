@@ -159,7 +159,7 @@ cd /tmp
 
 
 # Modification du Fichier config de Nginx
-kdir -p /var/www/html/log
+mkdir -p /var/www/html/log
 sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/fpm/php.ini
 sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/fpm/php.ini
 sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/fpm/php.ini
