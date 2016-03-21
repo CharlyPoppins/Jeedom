@@ -107,8 +107,8 @@ then
 		echo "Vous avez choisi le Port : "$answer;
 		echo "Changement de Port en Cours...";
 		echo ""; echo "";
-		sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-en$
-		sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g'$
+		sed -i 's/listen 80 default_server;/listen '"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
+		sed -i 's/listen \[\:\:\]\:80 default_server;/listen \[\:\:\]\:'"$answer"' default_server;/g' /etc/nginx/sites-enabled/default
 
 		cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
 
