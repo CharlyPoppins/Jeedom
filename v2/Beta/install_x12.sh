@@ -87,15 +87,15 @@ apt-get -y install php5-gd
 apt-get -y install php-pear
 apt-get -y install ca-certificates
 
-# pecl install oauth
-# if [ $? -eq 0 ] ; then
-# 	for i in fpm cli ; do
-# 		PHP_OAUTH="`cat /etc/php5/${i}/php.ini | grep -e 'oauth.so'`"
-# 		if [ -z "${PHP_OAUTH}" ] ; then
-# 			echo "extension=oauth.so" >> /etc/php5/${i}/php.ini
-# 		fi
-# 	done
-# fi
+pecl install oauth
+if [ $? -eq 0 ] ; then
+	for i in fpm cli ; do
+		PHP_OAUTH="`cat /etc/php5/${i}/php.ini | grep -e 'oauth.so'`"
+		if [ -z "${PHP_OAUTH}" ] ; then
+			echo "extension=oauth.so" >> /etc/php5/${i}/php.ini
+		fi
+	done
+fi
 }
 
 
