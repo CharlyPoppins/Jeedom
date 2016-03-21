@@ -70,6 +70,7 @@ apt-get -y install vim
 apt-get -y install unzip
 apt-get -y install htop
 apt-get -y install nano
+apt-get -y install ntp
 }
 
 
@@ -126,7 +127,7 @@ then
 		echo "Vous avez choisi le Port : "$answer;
 		echo "Changement de Port en Cours...";
 		echo ""; echo "";
-		sed -i 's/#listen   80;/listen '"$answer"'/g' /etc/nginx/sites-available/default
+		sed -i 's/#listen   80;/listen '"$answer"';/g' /etc/nginx/sites-available/default
 		sed -i 's/#listen   \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/nginx/sites-available/default
 
 		if [ -f '/etc/nginx/sites-enabled/default' ] ; then
