@@ -40,8 +40,8 @@ install_msg_fr() {
 	msg_question_port="Quel Port désirez-vous utiliser ? : "
 	msg_question_zwave="Désirez-vous utiliser le Protocol Z-wave ? (oui/non) : "
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
-	msg_dir_jeedom="Repertoir Jeedom..."
-	msg_dir_cache="Repertoir Cache..."
+	msg_dir_jeedom="Dossier Jeedom..."
+	msg_dir_cache="Dossier Cache..."
 	msg_port_already_used="Le Port 80 est deja utilise sur le Synology..."
 	msg_choose_other_port="Veuillez choisir un autre Port."
 	msg_your_port_choice="Vous avez choisi le Port : "
@@ -69,8 +69,8 @@ install_msg_en() {
 	msg_question_port="Quel Port désirez-vous utiliser ? : "
 	msg_question_zwave="Désirez-vous utiliser le Protocol Z-wave ? (oui/non) : "
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
-	msg_dir_jeedom="Repertoir Jeedom..."
-	msg_dir_cache="Repertoir Cache..."
+	msg_dir_jeedom="Dossier Jeedom..."
+	msg_dir_cache="Dossier Cache..."
 	msg_port_already_used="Le Port 80 est deja utilise sur le Synology..."
 	msg_choose_other_port="Veuillez choisir un autre Port."
 	msg_your_port_choice="Vous avez choisi le Port : "
@@ -98,8 +98,8 @@ install_msg_de() {
 	msg_question_port="Quel Port désirez-vous utiliser ? : "
 	msg_question_zwave="Désirez-vous utiliser le Protocol Z-wave ? (oui/non) : "
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
-	msg_dir_jeedom="Repertoir Jeedom..."
-	msg_dir_cache="Repertoir Cache..."
+	msg_dir_jeedom="Dossier Jeedom..."
+	msg_dir_cache="Dossier Cache..."
 	msg_port_already_used="Le Port 80 est deja utilise sur le Synology..."
 	msg_choose_other_port="Veuillez choisir un autre Port."
 	msg_your_port_choice="Vous avez choisi le Port : "
@@ -229,7 +229,7 @@ check_apache2() {
 	echo "**********************************************************"
 	echo "${msg_check_apache}"
 	echo "**********************************************************"
-	echo ""; echo "";
+	echo "";
 
 	dpkg-query -l apache2 > /dev/null;
 
@@ -297,19 +297,18 @@ check_right() {
 	echo "**********************************************************"
 	echo "${msg_check_right}"
 	echo "**********************************************************"
-	echo ""; echo "";
-	sudo chown -R www-data:www-data /var/www/html
+	echo "";
+	chown -R www-data:www-data /var/www/html
 
 	echo "${msg_dir_jeedom}"
 	echo -n "[$(date +%d-%m-%Y\ %H:%M:%S)] Dossier Jeedom..."
-	sudo chown -R www-data:www-data /var/www/html
-	sudo chmod 775 -R /var/www/html
+	chown -R www-data:www-data /var/www/html
+	chmod 775 -R /var/www/html
 	echo "OK"
 
 	echo "${msg_dir_cache}"
 	echo -n "[$(date +%d-%m-%Y\ %H:%M:%S)] Dossier Cache..."
-	sudo chown -R www-data:www-data /var/www/html
-	sudo chmod 775 -R /tmp/jeedom-cache
+	chmod 775 -R /tmp/jeedom-cache
 	echo "OK"
 }
 
