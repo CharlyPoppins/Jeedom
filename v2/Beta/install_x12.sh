@@ -2,7 +2,7 @@
 #
 # Installateur Synology x12 Series
 #
-# SFY alias stef74
+# SFY alias stef74 & PuNiSHeR
 # Version jeedom 2.x.x en chroot synology
 #
 # Dans le chroot :
@@ -13,7 +13,7 @@
 #
 # De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
 # Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
-# Enocean don't work on 32bits
+# Enocean don't work on 32bits.
 
 
 setup_i18n() {
@@ -351,12 +351,13 @@ cronjob="* * * * * $croncmd"
 ( crontab -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -
 
 
-#Changement des droits
+# Changement des droits
 check_right
 
 service php5-fpm restart
 
-#d'apres la doc jeedom
+
+# D'apres la doc jeedom
 mkdir -p /var/www/html
 rm -rf /root/core-*
 wget https://github.com/jeedom/core/archive/stable.zip -O /tmp/jeedom.zip
@@ -366,6 +367,7 @@ cp -R /root/core-*/.htaccess /var/www/html/
 
 rm /tmp/jeedom.zip
 
-# redemarrage des services
+
+# Redémarrage des services
 service cron restart
 service nginx restart
