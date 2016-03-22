@@ -17,195 +17,256 @@
 
 
 setup_i18n() {
-    lang=${LANG:=en_US}
-    case ${lang} in
-        [Ff][Rr]*)
-            install_msg_fr
-        ;;
-        [Ee][Nn]*|*)
-            install_msg_en
-        ;;
-        [De][De]*|*)
-            install_msg_de
-        ;;
-    esac
+	lang=${LANG:=en_US}
+	case ${lang} in
+		[Ff][Rr]*)
+			install_msg_fr
+		;;
+		[Ee][Nn]*|*)
+			install_msg_en
+		;;
+		[De][De]*|*)
+			install_msg_de
+		;;
+	esac
 }
 
 
 install_msg_fr() {
-    msg_installer_welcome="*Bienvenue dans l'intallation de Jeedom sur Debian Chroot*"
-    msg_answer_yesno="Répondez oui ou non"
+	msg_installer_welcome="*Bienvenue dans l'intallation de Jeedom sur Debian Chroot*"
+	msg_answer_yesno="Répondez oui ou non"
 	msg_question_port="Quel Port désirez-vous utiliser ? "
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
 	msg_dir_jeedom="Repertoir Jeedom..."
 	msg_dir_cache="Repertoir Cache..."
+	msg_port_already_used="Le Port 80 est deja utilise sur le Synology..."
+	msg_choose_other_port="Veuillez choisir un autre Port."
+	msg_your_port_choice="Vous avez choisi le Port : "
+	msg_port_changing="Changement de Port en Cours..."
+	msg_not_empty_port="Vous ne pouvez pas laisser le Port vide..."
+	msg_restart_nginx="Redemarrage de Nginx..."
+	msg_you_write="Vous avez introduit : "
+	msg_only_numbers="Veuillez introduire que des chiffres."
+	msg_del_apache_detected="Apache2 detecte, suppression en Cours..."
+	msg_del_dir_apache="Dossier Apache2 detecte, suppression en Cours..."
+	msg_del_dir_html="Dossier HTML detecte, suppression en Cours..."
+	msg_check_apache="*      Verification de la Presence de Apache2         *"
+	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
+	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
 }
 
 
 install_msg_en() {
-    msg_installer_welcome="*      Welcome to the Jeedom installer/updater        *"
-    msg_answer_yesno="Answer yes or no"
+	msg_installer_welcome="*      Welcome to the Jeedom installer/updater        *"
+	msg_answer_yesno="Answer yes or no"
 	msg_question_port="Quel Port désirez-vous utiliser ? "
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
 	msg_dir_jeedom="Repertoir Jeedom..."
 	msg_dir_cache="Repertoir Cache..."
+	msg_port_already_used="Le Port 80 est deja utilise sur le Synology..."
+	msg_choose_other_port="Veuillez choisir un autre Port."
+	msg_your_port_choice="Vous avez choisi le Port : "
+	msg_port_changing="Changement de Port en Cours..."
+	msg_not_empty_port="Vous ne pouvez pas laisser le Port vide..."
+	msg_restart_nginx="Redemarrage de Nginx..."
+	msg_you_write="Vous avez introduit : "
+	msg_only_numbers="Veuillez introduire que des chiffres."
+	msg_del_apache_detected="Apache2 detecte, suppression en Cours..."
+	msg_del_dir_apache="Dossier Apache2 detecte, suppression en Cours..."
+	msg_del_dir_html="Dossier HTML detecte, suppression en Cours..."
+	msg_check_apache="*      Verification de la Presence de Apache2         *"
+	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
+	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
 }
 
 
 install_msg_de() {
-    msg_installer_welcome="*      Willkommen beim Jeedom Installer / Updater        *"
-    msg_answer_yesno="Antwort ja oder nein"
+	msg_installer_welcome="*      Willkommen beim Jeedom Installer / Updater        *"
+	msg_answer_yesno="Antwort ja oder nein"
 	msg_question_port="Quel Port désirez-vous utiliser ? "
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
 	msg_dir_jeedom="Repertoir Jeedom..."
 	msg_dir_cache="Repertoir Cache..."
+	msg_port_already_used="Le Port 80 est deja utilise sur le Synology..."
+	msg_choose_other_port="Veuillez choisir un autre Port."
+	msg_your_port_choice="Vous avez choisi le Port : "
+	msg_port_changing="Changement de Port en Cours..."
+	msg_not_empty_port="Vous ne pouvez pas laisser le Port vide..."
+	msg_restart_nginx="Redemarrage de Nginx..."
+	msg_you_write="Vous avez introduit : "
+	msg_only_numbers="Veuillez introduire que des chiffres."
+	msg_del_apache_detected="Apache2 detecte, suppression en Cours..."
+	msg_del_dir_apache="Dossier Apache2 detecte, suppression en Cours..."
+	msg_del_dir_html="Dossier HTML detecte, suppression en Cours..."
+	msg_check_apache="*      Verification de la Presence de Apache2         *"
+	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
+	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
 }
 
 
 install_dependency() {
-chmod 777 /dev/tty*
-apt-get update
-apt-get -y install locales
-dpkg-reconfigure locales
-dpkg-reconfigure tzdata
-apt-get -y upgrade
-apt-get -y install build-essential
-apt-get -y install Dialog
-apt-get -y install sudo
-apt-get -y install curl
-apt-get -y install make
-apt-get -y install mc
-apt-get -y install vim
-apt-get -y install unzip
-apt-get -y install htop
-apt-get -y install nano
-apt-get -y install ntp
+	chmod 777 /dev/tty*
+	apt-get update
+	apt-get -y install locales
+	dpkg-reconfigure locales
+	dpkg-reconfigure tzdata
+	apt-get -y upgrade
+	apt-get -y install build-essential
+	apt-get -y install Dialog
+	apt-get -y install sudo
+	apt-get -y install curl
+	apt-get -y install make
+	apt-get -y install mc
+	apt-get -y install vim
+	apt-get -y install unzip
+	apt-get -y install htop
+	apt-get -y install nano
+	apt-get -y install ntp
 }
 
 
 install_webserver() {
-apt-get -y install mysql-client
-apt-get -y install nginx
-apt-get -y install php5-fpm
-apt-get -y install php5-curl
-apt-get -y install php5-dev
-apt-get -y install php5-json
-apt-get -y install php5-mysql
-apt-get -y install php5-ldap
-apt-get -y install php5-gd
-apt-get -y install php-pear
-apt-get -y install ca-certificates
+	apt-get -y install mysql-client
+	apt-get -y install nginx
+	apt-get -y install php5-fpm
+	apt-get -y install php5-curl
+	apt-get -y install php5-dev
+	apt-get -y install php5-json
+	apt-get -y install php5-mysql
+	apt-get -y install php5-ldap
+	apt-get -y install php5-gd
+	apt-get -y install php-pear
+	apt-get -y install ca-certificates
 
-pecl install oauth
-if [ $? -eq 0 ] ; then
-	for i in fpm cli ; do
-		PHP_OAUTH="`cat /etc/php5/${i}/php.ini | grep -e 'oauth.so'`"
-		if [ -z "${PHP_OAUTH}" ] ; then
-			echo "extension=oauth.so" >> /etc/php5/${i}/php.ini
-		fi
-	done
-fi
+	pecl install oauth
+	if [ $? -eq 0 ] ; then
+		for i in fpm cli ; do
+			PHP_OAUTH="`cat /etc/php5/${i}/php.ini | grep -e 'oauth.so'`"
+			if [ -z "${PHP_OAUTH}" ] ; then
+				echo "extension=oauth.so" >> /etc/php5/${i}/php.ini
+			fi
+		done
+	fi
 }
 
 
 configure_nginx() {
-echo ""; echo "";
-echo -n "Quel Port desirez vous ? "
-read answer
+	echo ""; echo "";
+	echo -n "${msg_question_port}"
+	read answer
 
-if [ "$(echo $answer | grep "^[ [:digit:] ]*$")" ]
-then
-	if [ $answer -eq 80 ]; then
+	if [ "$(echo $answer | grep "^[ [:digit:] ]*$")" ]
+	then
+		if [ "$(echo $answer | grep -o ' ' | wc -l)" -ne 0 ]; then
+			echo ""; echo "";
+			echo "${msg_space_detected}";
+			configure_nginx
+		elif [ $answer -gt 65535 ]; then
+			echo ""; echo "";
+			echo "${msg_port_greater}";
+			configure_nginx
+		elif [ $answer -eq 80 ]; then
+			echo ""; echo "";
+			echo "${msg_port_already_used}";
+			echo "${msg_choose_other_port}";
+			configure_nginx
+		else
+			echo ""; echo "";
+			echo "${msg_your_port_choice}"$answer;
+			echo "${msg_port_changing}";
+			echo ""; echo "";
+			sed -i 's/#listen   80;/listen '"$answer"';/g' /etc/nginx/sites-available/default
+			sed -i 's/#listen   \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/nginx/sites-available/default
+
+			if [ -f '/etc/nginx/sites-enabled/default' ] ; then
+				rm /etc/nginx/sites-enabled/default
+				cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+			fi
+
+			if [ ! -f '/etc/nginx/sites-available/jeedom_dynamic_rule' ] ; then
+				touch /etc/nginx/sites-available/jeedom_dynamic_rule
+			fi
+			chmod 777 /etc/nginx/sites-available/jeedom_dynamic_rule
+
+			echo "${msg_restart_nginx}";
+
+			service nginx start
+			
+			update-rc.d nginx defaults
+		fi
+	elif [ -z $answer ]; then
 		echo ""; echo "";
-		echo "Le Port 80 est deja utilise sur le Synology...";
-		echo "Veuillez en choisir une autre.";
+		echo "${msg_not_empty_port}";
 		configure_nginx
+
 	else
 		echo ""; echo "";
-		echo "Vous avez choisi le Port : "$answer;
-		echo "Changement de Port en Cours...";
-		echo ""; echo "";
-		sed -i 's/#listen   80;/listen '"$answer"';/g' /etc/nginx/sites-available/default
-		sed -i 's/#listen   \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/nginx/sites-available/default
-
-		if [ -f '/etc/nginx/sites-enabled/default' ] ; then
-			rm /etc/nginx/sites-enabled/default
-			cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-		fi
-
-		if [ ! -f '/etc/nginx/sites-available/jeedom_dynamic_rule' ] ; then
-			touch /etc/nginx/sites-available/jeedom_dynamic_rule
-		fi
-		chmod 777 /etc/nginx/sites-available/jeedom_dynamic_rule
-
-		echo "Redemarrage de Nginx...";
-
-		service nginx start
-		
-		update-rc.d nginx defaults
+		echo "${msg_you_write}"$answer;
+		echo "";
+		echo "${msg_only_numbers}";
+		configure_nginx
 	fi
-elif [ -z $answer ]; then
-	echo ""; echo "";
-	echo "Vous ne pouvez pas laisser le Port vide...";
-	configure_nginx
-else
-	echo ""; echo "";
-	echo "Vous avez introduit : "$answer;
-	echo "Veuillez introduire que des chiffres.";
-	configure_nginx
-fi
 }
 
 
-delete_apache2() {
-dpkg-query -l apache2 > /dev/null;
+check_apache2() {
+	echo ""; echo "";
+	echo "**********************************************************"
+	echo "${msg_check_apache}"
+	echo "**********************************************************"
+	echo ""; echo "";
 
-if [ $? -eq 0 ] ; then
-	echo "Apache2 detecte, suppression en Cours...";
-	service apache2 stop
-	apt-get -y autoremove --purge apache2
-fi
+	dpkg-query -l apache2 > /dev/null;
 
-if [ -d "/etc/apache2" ];then
-	echo "Dossier Apache2 detecte, suppression en Cours...";
-	rm -Rf /etc/apache2
-fi
+	if [ $? -eq 0 ] ; then
+		echo "";
+		echo "${msg_del_apache_detected}";
+		service apache2 stop
+		apt-get -y autoremove --purge apache2
+	fi
 
-if [ -d "/var/www/html" ];then
-	echo "Dossier HTML detecte, suppression en Cours...";
-	rm -Rf /var/www/html
-fi
+	if [ -d "/etc/apache2" ]; then
+		echo "";
+		echo "${msg_del_dir_apache}";
+		rm -Rf /etc/apache2
+	fi
+
+	if [ -d "/var/www/html" ]; then
+		echo "";
+		echo "${msg_del_dir_html}";
+		rm -Rf /var/www/html
+	fi
 }
 
 
 configure_php() {
-sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/fpm/php.ini
-sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/fpm/php.ini
-sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/fpm/php.ini
-sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/fpm/php.ini
-sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
+	sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/fpm/php.ini
+	sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/fpm/php.ini
+	sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/fpm/php.ini
+	sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/fpm/php.ini
+	sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
 }
 
 
 check_right() {
-echo ""; echo "";
-echo "**********************************************************"
-echo "${msg_check_right}"
-echo "**********************************************************"
-echo ""; echo "";
-sudo chown -R www-data:www-data /var/www/html
+	echo ""; echo "";
+	echo "**********************************************************"
+	echo "${msg_check_right}"
+	echo "**********************************************************"
+	echo ""; echo "";
+	sudo chown -R www-data:www-data /var/www/html
 
-echo "${msg_dir_jeedom}"
-echo -n "[$(date +%d-%m-%Y\ %H:%M:%S)] Dossier Jeedom..."
-sudo chown -R www-data:www-data /var/www/html
-sudo chmod 775 -R /var/www/html
-echo "OK"
+	echo "${msg_dir_jeedom}"
+	echo -n "[$(date +%d-%m-%Y\ %H:%M:%S)] Dossier Jeedom..."
+	sudo chown -R www-data:www-data /var/www/html
+	sudo chmod 775 -R /var/www/html
+	echo "OK"
 
-echo "${msg_dir_cache}"
-echo -n "[$(date +%d-%m-%Y\ %H:%M:%S)] Dossier Cache..."
-sudo chown -R www-data:www-data /var/www/html
-sudo chmod 775 -R /tmp/jeedom-cache
-echo "OK"
+	echo "${msg_dir_cache}"
+	echo -n "[$(date +%d-%m-%Y\ %H:%M:%S)] Dossier Cache..."
+	sudo chown -R www-data:www-data /var/www/html
+	sudo chmod 775 -R /tmp/jeedom-cache
+	echo "OK"
 }
 
 
@@ -221,9 +282,9 @@ echo ""; echo "";
 
 # Vérification qu'on est bien en root
 if [ $(id -u) != 0 ] ; then
-    echo "Super-user (root) privileges are required to install Jeedom"
-    echo "Please run 'sudo $0' or log in as root, and rerun $0"
-    exit 1
+	echo "Super-user (root) privileges are required to install Jeedom"
+	echo "Please run 'sudo $0' or log in as root, and rerun $0"
+	exit 1
 fi
 
 
@@ -238,7 +299,7 @@ echo "cd /home" >> ~/.bashrc
 
 
 # Vérification de la présence de Apache2
-delete_apache2
+check_apache2
 
 
 # Installation du Serveur Web
