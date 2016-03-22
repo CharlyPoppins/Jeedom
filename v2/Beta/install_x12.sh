@@ -2,7 +2,7 @@
 #
 # Installateur Synology x12 Series
 #
-# SFY alias stef74
+# PuNiSHeR & SFY alias stef74
 # Version jeedom 2.x.x en chroot synology
 #
 # Dans le chroot :
