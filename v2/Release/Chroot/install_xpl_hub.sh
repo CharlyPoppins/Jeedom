@@ -22,4 +22,6 @@ make
 
 sudo cp xPL_Hub xPL_Logger /usr/local/bin
 
+update-rc.d /usr/local/bin/xPL_Hub defaults
+
 /usr/local/bin/xPL_Hub
