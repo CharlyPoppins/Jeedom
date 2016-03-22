@@ -2,7 +2,7 @@
 #
 # Installateur Synology x12 Series
 #
-# PuNiSHeR & SFY alias stef74
+# SFY alias stef74
 # Version jeedom 2.x.x en chroot synology
 #
 # Dans le chroot :
@@ -33,7 +33,6 @@ setup_i18n() {
 
 
 install_msg_fr() {
-<<<<<<< HEAD
 	msg_installer_welcome="*Bienvenue dans l'intallation de Jeedom sur Debian Chroot*"
 	msg_answer_yesno="Répondez oui ou non"
 	msg_question_port="Quel Port désirez-vous utiliser ? "
@@ -54,19 +53,10 @@ install_msg_fr() {
 	msg_check_apache="*      Verification de la Presence de Apache2         *"
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
-=======
-    msg_installer_welcome="*Bienvenue dans l'intallation de Jeedom sur Debian Chroot*"
-    msg_answer_yesno="Répondez oui ou non"
-    msg_question_port="Quel Port désirez-vous utiliser ? "
-    msg_check_right="*       Controle des Droits sur les Dossiers          *"
-    msg_dir_jeedom="Repertoir Jeedom..."
-    msg_dir_cache="Repertoir Cache..."
->>>>>>> origin/master
 }
 
 
 install_msg_en() {
-<<<<<<< HEAD
 	msg_installer_welcome="*      Welcome to the Jeedom installer/updater        *"
 	msg_answer_yesno="Answer yes or no"
 	msg_question_port="Quel Port désirez-vous utiliser ? "
@@ -87,19 +77,10 @@ install_msg_en() {
 	msg_check_apache="*      Verification de la Presence de Apache2         *"
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
-=======
-    msg_installer_welcome="*      Welcome to the Jeedom installer/updater        *"
-    msg_answer_yesno="Answer yes or no"
-    msg_question_port="Quel Port désirez-vous utiliser ? "
-    msg_check_right="*       Controle des Droits sur les Dossiers          *"
-    sg_dir_jeedom="Repertoir Jeedom..."
-    msg_dir_cache="Repertoir Cache..."
->>>>>>> origin/master
 }
 
 
 install_msg_de() {
-<<<<<<< HEAD
 	msg_installer_welcome="*      Willkommen beim Jeedom Installer / Updater        *"
 	msg_answer_yesno="Antwort ja oder nein"
 	msg_question_port="Quel Port désirez-vous utiliser ? "
@@ -120,14 +101,6 @@ install_msg_de() {
 	msg_check_apache="*      Verification de la Presence de Apache2         *"
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
-=======
-    msg_installer_welcome="*      Willkommen beim Jeedom Installer / Updater        *"
-    msg_answer_yesno="Antwort ja oder nein"
-    msg_question_port="Quel Port désirez-vous utiliser ? "
-    msg_check_right="*       Controle des Droits sur les Dossiers          *"
-    msg_dir_jeedom="Repertoir Jeedom..."
-    msg_dir_cache="Repertoir Cache..."
->>>>>>> origin/master
 }
 
 
@@ -153,7 +126,6 @@ install_dependency() {
 
 
 install_webserver() {
-<<<<<<< HEAD
 	apt-get -y install mysql-client
 	apt-get -y install nginx
 	apt-get -y install php5-fpm
@@ -175,29 +147,6 @@ install_webserver() {
 			fi
 		done
 	fi
-=======
-apt-get -y install mysql-client
-apt-get -y install nginx
-apt-get -y install php5-fpm
-apt-get -y install php5-curl
-apt-get -y install php5-dev
-apt-get -y install php5-json
-apt-get -y install php5-mysql
-apt-get -y install php5-ldap
-apt-get -y install php5-gd
-apt-get -y install php-pear
-apt-get -y install ca-certificates
-
-pecl install oauth
-if [ $? -eq 0 ] ; then
-    for i in fpm cli ; do
-	PHP_OAUTH="`cat /etc/php5/${i}/php.ini | grep -e 'oauth.so'`"
-	if [ -z "${PHP_OAUTH}" ] ; then
-            echo "extension=oauth.so" >> /etc/php5/${i}/php.ini
-	fi
-    done
-fi
->>>>>>> origin/master
 }
 
 
