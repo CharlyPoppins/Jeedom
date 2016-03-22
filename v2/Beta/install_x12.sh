@@ -278,6 +278,7 @@ install_zwave() {
 				echo ""; echo "";
 				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Release/Chroot/install_zwave.sh
 				chmod +x install_zwave.sh
+				./install_zwave.sh
 				break
 			;;
 			${msg_no})
