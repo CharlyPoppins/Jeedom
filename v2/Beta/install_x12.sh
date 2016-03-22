@@ -35,30 +35,30 @@ setup_i18n() {
 install_msg_fr() {
     msg_installer_welcome="*Bienvenue dans l'intallation de Jeedom sur Debian Chroot*"
     msg_answer_yesno="Répondez oui ou non"
-	msg_question_port="Quel Port désirez-vous utiliser ? "
-	msg_check_right="*       Controle des Droits sur les Dossiers          *"
-	msg_dir_jeedom="Repertoir Jeedom..."
-	msg_dir_cache="Repertoir Cache..."
+    msg_question_port="Quel Port désirez-vous utiliser ? "
+    msg_check_right="*       Controle des Droits sur les Dossiers          *"
+    msg_dir_jeedom="Repertoir Jeedom..."
+    msg_dir_cache="Repertoir Cache..."
 }
 
 
 install_msg_en() {
     msg_installer_welcome="*      Welcome to the Jeedom installer/updater        *"
     msg_answer_yesno="Answer yes or no"
-	msg_question_port="Quel Port désirez-vous utiliser ? "
-	msg_check_right="*       Controle des Droits sur les Dossiers          *"
-	msg_dir_jeedom="Repertoir Jeedom..."
-	msg_dir_cache="Repertoir Cache..."
+    msg_question_port="Quel Port désirez-vous utiliser ? "
+    msg_check_right="*       Controle des Droits sur les Dossiers          *"
+    sg_dir_jeedom="Repertoir Jeedom..."
+    msg_dir_cache="Repertoir Cache..."
 }
 
 
 install_msg_de() {
     msg_installer_welcome="*      Willkommen beim Jeedom Installer / Updater        *"
     msg_answer_yesno="Antwort ja oder nein"
-	msg_question_port="Quel Port désirez-vous utiliser ? "
-	msg_check_right="*       Controle des Droits sur les Dossiers          *"
-	msg_dir_jeedom="Repertoir Jeedom..."
-	msg_dir_cache="Repertoir Cache..."
+    msg_question_port="Quel Port désirez-vous utiliser ? "
+    msg_check_right="*       Controle des Droits sur les Dossiers          *"
+    msg_dir_jeedom="Repertoir Jeedom..."
+    msg_dir_cache="Repertoir Cache..."
 }
 
 
@@ -98,12 +98,12 @@ apt-get -y install ca-certificates
 
 pecl install oauth
 if [ $? -eq 0 ] ; then
-	for i in fpm cli ; do
-		PHP_OAUTH="`cat /etc/php5/${i}/php.ini | grep -e 'oauth.so'`"
-		if [ -z "${PHP_OAUTH}" ] ; then
-			echo "extension=oauth.so" >> /etc/php5/${i}/php.ini
-		fi
-	done
+    for i in fpm cli ; do
+	PHP_OAUTH="`cat /etc/php5/${i}/php.ini | grep -e 'oauth.so'`"
+	if [ -z "${PHP_OAUTH}" ] ; then
+            echo "extension=oauth.so" >> /etc/php5/${i}/php.ini
+	fi
+    done
 fi
 }
 
