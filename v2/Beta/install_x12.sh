@@ -33,9 +33,12 @@ setup_i18n() {
 
 
 install_msg_fr() {
+	msg_yes="oui"
+	msg_no="non"
 	msg_installer_welcome="*Bienvenue dans l'intallation de Jeedom sur Debian Chroot*"
 	msg_answer_yesno="Répondez oui ou non"
-	msg_question_port="Quel Port désirez-vous utiliser ? "
+	msg_question_port="Quel Port désirez-vous utiliser ? : "
+	msg_question_zwave="Désirez-vous utiliser le Protocol Z-wave ? (oui/non) : "
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
 	msg_dir_jeedom="Repertoir Jeedom..."
 	msg_dir_cache="Repertoir Cache..."
@@ -53,13 +56,18 @@ install_msg_fr() {
 	msg_check_apache="*      Verification de la Presence de Apache2         *"
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
+	msg_install_zwave="*          Installation dépendances Z-Wave            *"
+	msg_not_install_zwave="D'accord, vous n'utilisez pas le Protocol Z-Wave."
 }
 
 
 install_msg_en() {
+	msg_yes="oui"
+	msg_no="non"
 	msg_installer_welcome="*      Welcome to the Jeedom installer/updater        *"
 	msg_answer_yesno="Answer yes or no"
-	msg_question_port="Quel Port désirez-vous utiliser ? "
+	msg_question_port="Quel Port désirez-vous utiliser ? : "
+	msg_question_zwave="Désirez-vous utiliser le Protocol Z-wave ? (oui/non) : "
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
 	msg_dir_jeedom="Repertoir Jeedom..."
 	msg_dir_cache="Repertoir Cache..."
@@ -77,13 +85,18 @@ install_msg_en() {
 	msg_check_apache="*      Verification de la Presence de Apache2         *"
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
+	msg_install_zwave="*          Installation dépendances Z-Wave            *"
+	msg_not_install_zwave="D'accord, vous n'utilisez pas le Protocol Z-Wave."
 }
 
 
 install_msg_de() {
+	msg_yes="oui"
+	msg_no="non"
 	msg_installer_welcome="*      Willkommen beim Jeedom Installer / Updater        *"
 	msg_answer_yesno="Antwort ja oder nein"
-	msg_question_port="Quel Port désirez-vous utiliser ? "
+	msg_question_port="Quel Port désirez-vous utiliser ? : "
+	msg_question_zwave="Désirez-vous utiliser le Protocol Z-wave ? (oui/non) : "
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
 	msg_dir_jeedom="Repertoir Jeedom..."
 	msg_dir_cache="Repertoir Cache..."
@@ -101,6 +114,8 @@ install_msg_de() {
 	msg_check_apache="*      Verification de la Presence de Apache2         *"
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
+	msg_install_zwave="*          Installation dépendances Z-Wave            *"
+	msg_not_install_zwave="D'accord, vous n'utilisez pas le Protocol Z-Wave."
 }
 
 
@@ -248,6 +263,34 @@ configure_php() {
 }
 
 
+install_zwave() {
+	while true ; do
+		echo ""; echo "";
+		echo -n "${msg_question_zwave}"
+		read answer
+
+		case $answer in
+			${msg_yes})
+				echo ""; echo "";
+				echo "**********************************************************"
+				echo "${msg_install_zwave}"
+				echo "**********************************************************"
+				echo ""; echo "";
+				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Release/Chroot/install_zwave.sh
+				chmod +x install_zwave.sh
+				break
+			;;
+			${msg_no})
+				echo ""; echo "";
+				echo "${msg_not_install_zwave}";
+				break
+			;;
+		esac
+		echo "";
+	done
+}
+
+
 check_right() {
 	echo ""; echo "";
 	echo "**********************************************************"
@@ -323,6 +366,10 @@ configure_nginx
 
 # Configuration de PHP
 configure_php
+
+
+# Installation Z-Wave
+install_zwave
 
 
 # Status sous syno de Nginx et demarrage des services Jeedom
