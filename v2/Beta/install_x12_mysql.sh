@@ -293,7 +293,7 @@ install_mysql() {
 				echo ""; echo "";
 				apt-get -y install mysql-common
 				apt-get -y install mysql-server
-				configure_mysql
+			#	configure_mysql
 				apt-get -y install mysql-server-core-5.5
 				
 				break
