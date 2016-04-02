@@ -292,7 +292,6 @@ install_mysql() {
 				echo "**********************************************************"
 				echo ""; echo "";
 				apt-get -y install mysql-common
-				apt-get -y install mysql-server
 				configure_mysql
 				
 				
@@ -334,8 +333,8 @@ configure_mysql() {
 			echo "${msg_port_changing}";
 			echo ""; echo "";
 			service mysql stop
-			sed -i 's/port = 3306/port = '"$answer"';/g' /etc/mysql/my.cnf
-			apt-get -y install mysql-server-core-5.5
+			sed -i 's/port \t\t= 3306/port \t\t= '"$answer"';/g' /etc/mysql/my.cnf
+			apt-get -y install mysql-server
 			
 
 			echo "${msg_restart_mysql}";
