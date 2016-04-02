@@ -293,8 +293,8 @@ install_mysql() {
 				echo ""; echo "";
 				apt-get -y install mysql-common
 				apt-get -y install mysql-server
-			#	configure_mysql
-				apt-get -y install mysql-server-core-5.5
+				configure_mysql
+				
 				
 				break
 			;;
@@ -335,12 +335,12 @@ configure_mysql() {
 			echo ""; echo "";
 			service mysql stop
 			sed -i 's/port = 3306/port = '"$answer"';/g' /etc/mysql/my.cnf
-			
+			apt-get -y install mysql-server-core-5.5
 			
 
 			echo "${msg_restart_mysql}";
 
-			service mysql start
+			service mysql restart
 			
 			#update-rc.d nginx defaults
 		fi
