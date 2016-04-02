@@ -334,7 +334,7 @@ configure_mysql() {
 			echo "${msg_port_changing}";
 			echo ""; echo "";
 			service mysql stop
-			sed -i 's/port = 3306/port = '"$answer"';/g /etc/mysql/my.cnf
+			sed -i 's/port = 3306/port = '"$answer"';/g /etc/mysql/my.cnf'
 			
 			
 
