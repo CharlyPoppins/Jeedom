@@ -7,9 +7,9 @@
 #
 # Dans le chroot :
 # cd /tmp
-# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install_x12_bis.sh
-# chmod +x install_x12_bis.sh
-# sh install_x12_bis.sh
+# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install_x12_mysql.sh
+# chmod +x install_x12_mysql.sh
+# sh install_x12_mysql.sh
 #
 # De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
 # Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
