@@ -291,8 +291,10 @@ install_mysql() {
 				echo "${msg_install_mysql}"
 				echo "**********************************************************"
 				echo ""; echo "";
-				apt-get -y install mysql-server
 				configure_mysql
+				apt-get -y install mysql-common
+				apt-get -y install mysql-server
+				
 				
 				
 				break
@@ -334,11 +336,10 @@ configure_mysql() {
 			echo ""; echo "";
 			service mysql stop
 			mkdir/etc/mysql
-			
+			cd /etc/mysql
+			 wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/my.cnf
 			sed -i 's/port \t\t= 3306/port \t\t= '"$answer"';/g' /etc/mysql/my.cnf
-			apt-get -y install mysql-common
-			
-			
+			cd /tmp
 
 			echo "${msg_restart_mysql}";
 
