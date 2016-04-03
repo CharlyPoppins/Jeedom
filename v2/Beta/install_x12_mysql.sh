@@ -291,7 +291,7 @@ install_mysql() {
 				echo "${msg_install_mysql}"
 				echo "**********************************************************"
 				echo ""; echo "";
-				apt-get -y install mysql-server
+				apt-get -y install mysql-server-5.6
 				configure_mysql
 				apt-get -y install mysql-common
 				
