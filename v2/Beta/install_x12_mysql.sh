@@ -333,6 +333,8 @@ configure_mysql() {
 			echo "${msg_port_changing}";
 			echo ""; echo "";
 			service mysql stop
+			mkdir/etc/mysql
+			
 			sed -i 's/port \t\t= 3306/port \t\t= '"$answer"';/g' /etc/mysql/my.cnf
 			apt-get -y install mysql-common
 			
