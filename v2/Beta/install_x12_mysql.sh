@@ -514,4 +514,5 @@ rm /tmp/jeedom.zip
 
 # Redémarrage des services
 service cron restart
+service mysql restart
 service nginx restart
