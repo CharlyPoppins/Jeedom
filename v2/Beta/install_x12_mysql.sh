@@ -436,6 +436,8 @@ echo "export LC_ALL=fr_FR.utf8" >> ~/.bashrc
 
 echo "cd /home" >> ~/.bashrc
 
+# Installation de mysql
+install_mysql
 
 # Vérification de la présence de Apache2
 check_apache2
@@ -458,9 +460,6 @@ service nginx stop
 mv nginx_x12.conf /etc/nginx/sites-available/default
 
 configure_nginx
-
-# Installation de mysql
-install_mysql
 
 # Configuration de PHP
 configure_php
