@@ -206,7 +206,7 @@ configure_nginx() {
 			echo "${msg_restart_nginx}";
 
 			service nginx start
-			
+
 			update-rc.d nginx defaults
 		fi
 	elif [ -z $answer ]; then
@@ -231,9 +231,10 @@ check_apache2() {
 	echo "**********************************************************"
 	echo "";
 
+	#if [ $(ps ax | grep z-way-server | grep -v grep | wc -l ) -ne 0 ]; then
 	dpkg-query -l apache2 > /dev/null;
 
-	if [ $? -eq 0 ] ; then
+	if [ $? -ne 0 ] ; then
 		echo "";
 		echo "${msg_del_apache_detected}";
 		service apache2 stop
