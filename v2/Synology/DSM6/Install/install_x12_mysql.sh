@@ -7,9 +7,9 @@
 #
 # Dans le chroot :
 # cd /tmp
-# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install_x12.sh
-# chmod+x install_x12.sh
-# sh install_x12.sh
+# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install_x12_mysql.sh
+# chmod +x install_x12_mysql.sh
+# sh install_x12_mysql.sh
 #
 # De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
 # Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
@@ -37,8 +37,10 @@ install_msg_fr() {
 	msg_no="non"
 	msg_installer_welcome="*Bienvenue dans l'intallation de Jeedom sur Debian Chroot*"
 	msg_answer_yesno="Répondez oui ou non"
-	msg_question_port="Quel Port désirez-vous utiliser ? : "
+	msg_question_port="Quel Port désirez-vous utiliser pour nginx? : "
+	msg_question_port_mysql="Quel Port désirez-vous utiliser pour mysql? :"
 	msg_question_zwave="Désirez-vous utiliser le Protocol Z-wave ? (oui/non) : "
+	msg_question_mysql="Désirez-vous installer mysql? (oui/non) :"
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
 	msg_dir_jeedom="Dossier Jeedom..."
 	msg_dir_cache="Dossier Cache..."
@@ -48,6 +50,7 @@ install_msg_fr() {
 	msg_port_changing="Changement de Port en Cours..."
 	msg_not_empty_port="Vous ne pouvez pas laisser le Port vide..."
 	msg_restart_nginx="Redemarrage de Nginx..."
+	msg_restart_mysql="Redemarrage de mysql..."
 	msg_you_write="Vous avez introduit : "
 	msg_only_numbers="Veuillez introduire que des chiffres."
 	msg_del_apache_detected="Apache2 detecte, suppression en Cours..."
@@ -57,7 +60,9 @@ install_msg_fr() {
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
 	msg_install_zwave="*          Installation dépendances Z-Wave            *"
+	msg_install_mysql="*          Installation de mysql            *"
 	msg_not_install_zwave="D'accord, vous n'utilisez pas le Protocol Z-Wave."
+	msg_not_install_mysql="D'accord, vous n'utilisez pas mysql."
 }
 
 
@@ -67,16 +72,19 @@ install_msg_en() {
 	msg_installer_welcome="*      Welcome to the Jeedom installer/updater        *"
 	msg_answer_yesno="Answer yes or no"
 	msg_question_port="Quel Port désirez-vous utiliser ? : "
+	msg_question_mysql="Désirez-vous installer mysql? (oui/non) :"
+	msg_question_port_mysql="Quel Port désirez-vous utiliser pour mysql? :"
 	msg_question_zwave="Désirez-vous utiliser le Protocol Z-wave ? (oui/non) : "
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
-	msg_dir_jeedom="Dossier Jeedom..."
-	msg_dir_cache="Dossier Cache..."
+	msg_dir_jeedom="Folder Jeedom..."
+	msg_dir_cache="Folder Cache..."
 	msg_port_already_used="Le Port 80 est deja utilise sur le Synology..."
 	msg_choose_other_port="Veuillez choisir un autre Port."
 	msg_your_port_choice="Vous avez choisi le Port : "
 	msg_port_changing="Changement de Port en Cours..."
 	msg_not_empty_port="Vous ne pouvez pas laisser le Port vide..."
 	msg_restart_nginx="Redemarrage de Nginx..."
+	msg_restart_mysql="Redemarrage de mysql..."
 	msg_you_write="Vous avez introduit : "
 	msg_only_numbers="Veuillez introduire que des chiffres."
 	msg_del_apache_detected="Apache2 detecte, suppression en Cours..."
@@ -86,7 +94,9 @@ install_msg_en() {
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
 	msg_install_zwave="*          Installation dépendances Z-Wave            *"
+	msg_install_mysql="*          Installation de mysql            *"
 	msg_not_install_zwave="D'accord, vous n'utilisez pas le Protocol Z-Wave."
+	msg_not_install_mysql="D'accord, vous n'utilisez pas mysql."
 }
 
 
@@ -96,6 +106,8 @@ install_msg_de() {
 	msg_installer_welcome="*      Willkommen beim Jeedom Installer / Updater        *"
 	msg_answer_yesno="Antwort ja oder nein"
 	msg_question_port="Quel Port désirez-vous utiliser ? : "
+	msg_question_port_mysql="Quel Port désirez-vous utiliser pour mysql? :"
+	msg_question_mysql="Désirez-vous installer mysql? :"
 	msg_question_zwave="Désirez-vous utiliser le Protocol Z-wave ? (oui/non) : "
 	msg_check_right="*       Controle des Droits sur les Dossiers          *"
 	msg_dir_jeedom="Dossier Jeedom..."
@@ -106,6 +118,7 @@ install_msg_de() {
 	msg_port_changing="Changement de Port en Cours..."
 	msg_not_empty_port="Vous ne pouvez pas laisser le Port vide..."
 	msg_restart_nginx="Redemarrage de Nginx..."
+	msg_restart_mysql="Redemarrage de mysql..."
 	msg_you_write="Vous avez introduit : "
 	msg_only_numbers="Veuillez introduire que des chiffres."
 	msg_del_apache_detected="Apache2 detecte, suppression en Cours..."
@@ -115,7 +128,9 @@ install_msg_de() {
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
 	msg_install_zwave="*          Installation dépendances Z-Wave            *"
+	msg_install_mysql="*          Installation de mysql            *"
 	msg_not_install_zwave="D'accord, vous n'utilisez pas le Protocol Z-Wave."
+	msg_not_install_mysql="D'accord, vous n'utilisez pas mysql."
 }
 
 
@@ -206,7 +221,7 @@ configure_nginx() {
 			echo "${msg_restart_nginx}";
 
 			service nginx start
-
+			
 			update-rc.d nginx defaults
 		fi
 	elif [ -z $answer ]; then
@@ -224,6 +239,7 @@ configure_nginx() {
 }
 
 
+
 check_apache2() {
 	echo ""; echo "";
 	echo "**********************************************************"
@@ -231,10 +247,9 @@ check_apache2() {
 	echo "**********************************************************"
 	echo "";
 
-	#if [ $(ps ax | grep z-way-server | grep -v grep | wc -l ) -ne 0 ]; then
 	dpkg-query -l apache2 > /dev/null;
 
-	if [ $? -ne 0 ] ; then
+	if [ $? -eq 0 ] ; then
 		echo "";
 		echo "${msg_del_apache_detected}";
 		service apache2 stop
@@ -261,6 +276,86 @@ configure_php() {
 	sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/fpm/php.ini
 	sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/fpm/php.ini
 	sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
+}
+
+install_mysql() {
+	while true ; do
+		echo ""; echo "";
+		echo -n "${msg_question_mysql}"
+		read answer
+
+		case $answer in
+			${msg_yes})
+				echo ""; echo "";
+				echo "**********************************************************"
+				echo "${msg_install_mysql}"
+				echo "**********************************************************"
+				echo ""; echo "";
+				apt-get -y install mysql-server-5.5
+				configure_mysql
+			
+				
+				
+				
+				
+				break
+			;;
+			${msg_no})
+				echo ""; echo "";
+				echo "${msg_not_install_mysql}";
+				break
+			;;
+		esac
+		echo "";
+	done
+}
+
+configure_mysql() {
+	echo ""; echo "";
+	echo -n "${msg_question_port_mysql}"
+	read answer
+
+	if [ "$(echo $answer | grep "^[ [:digit:] ]*$")" ]
+	then
+		if [ "$(echo $answer | grep -o ' ' | wc -l)" -ne 0 ]; then
+			echo ""; echo "";
+			echo "${msg_space_detected}";
+			configure_mysql
+		elif [ $answer -gt 65535 ]; then
+			echo ""; echo "";
+			echo "${msg_port_greater}";
+			configure_mysql
+		elif [ $answer -eq 80 ]; then
+			echo ""; echo "";
+			echo "${msg_port_already_used}";
+			echo "${msg_choose_other_port}";
+			configure_mysql
+		else
+			echo ""; echo "";
+			echo "${msg_your_port_choice}"$answer;
+			echo "${msg_port_changing}";
+			echo ""; echo "";
+			service mysql stop
+			sed -i 's/port\t\t= 3306/port\t\t= '"$answer"'/g' /etc/mysql/my.cnf
+		
+			echo "${msg_restart_mysql}";
+
+			service mysql restart
+			
+			#update-rc.d nginx defaults
+		fi
+	elif [ -z $answer ]; then
+		echo ""; echo "";
+		echo "${msg_not_empty_port}";
+		configure_mysql
+
+	else
+		echo ""; echo "";
+		echo "${msg_you_write}"$answer;
+		echo "";
+		echo "${msg_only_numbers}";
+		configure_mysql
+	fi
 }
 
 
@@ -341,6 +436,8 @@ echo "export LC_ALL=fr_FR.utf8" >> ~/.bashrc
 
 echo "cd /home" >> ~/.bashrc
 
+# Installation de mysql
+install_mysql
 
 # Vérification de la présence de Apache2
 check_apache2
@@ -363,7 +460,6 @@ service nginx stop
 mv nginx_x12.conf /etc/nginx/sites-available/default
 
 configure_nginx
-
 
 # Configuration de PHP
 configure_php
@@ -418,4 +514,5 @@ rm /tmp/jeedom.zip
 
 # Redémarrage des services
 service cron restart
+service mysql restart
 service nginx restart

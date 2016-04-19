@@ -8,4 +8,4 @@ wget http://github.com/PuNiSHeR374/Jeedom/raw/master/v2/Synology/DSM5/Drivers/us
 wget http://github.com/PuNiSHeR374/Jeedom/raw/master/v2/Synology/DSM5/Drivers/S99Modules.sh
 mv *.ko /lib/modules
 mv S99Modules.sh /usr/syno/etc.defaults/rc.d/
-chmod 777 /usr/syno/etc.defaults/rc.d/S99Modules.sh
+chmod +x /usr/syno/etc.defaults/rc.d/S99Modules.sh
