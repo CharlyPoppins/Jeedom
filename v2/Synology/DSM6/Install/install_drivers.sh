@@ -11,4 +11,4 @@ mv *.ko /lib/modules
 
 mv S99Modules.sh /usr/local/etc/rc.d/
 
-chmod +x /usr/syno/etc.defaults/rc.d/S99Modules.sh
+chmod +x /usr/local/etc/rc.d/S99Modules.sh
