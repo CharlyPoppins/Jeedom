@@ -1,6 +1,7 @@
 #!/bin/sh
-# Jeedom  chroot V2.x.x Syno x12
+# Jeedom chroot V2.x.x Syno x12
 #stef74
+
 case "$1" in
    "start")
    /etc/init.d/rsyslog start
