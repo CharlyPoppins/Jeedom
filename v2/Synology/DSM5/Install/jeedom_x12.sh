@@ -1,5 +1,5 @@
 #!/bin/sh
-# Jeedom  chroot V2.1.X Syno X12
+# Jeedom  chroot V2.x.x Syno x12
 #stef74
 case "$1" in
    "start")
