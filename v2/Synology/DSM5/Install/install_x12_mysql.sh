@@ -7,12 +7,12 @@
 #
 # Dans le chroot :
 # cd /tmp
-# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install_x12_mysql.sh
+# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/install_x12_mysql.sh
 # chmod +x install_x12_mysql.sh
 # sh install_x12_mysql.sh
 #
 # De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
-# Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
+# Avoir installé les drivers usb soit manuellement
 # Enocean don't work on 32bits.
 
 
@@ -372,7 +372,7 @@ install_zwave() {
 				echo "${msg_install_zwave}"
 				echo "**********************************************************"
 				echo ""; echo "";
-				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Release/Chroot/install_zwave.sh
+				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Chroot/install_zwave.sh
 				chmod +x install_zwave.sh
 				./install_zwave.sh
 				break
@@ -453,7 +453,7 @@ if [ -f '/etc/nginx/sites-available/defaults' ] ; then
 fi
 
 cd /tmp
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Config/nginx_x12.conf
 
 service nginx stop
 
@@ -476,7 +476,7 @@ if [ -f "/home/jeedom.sh" ];then
 	rm /home/jeedom.sh
 fi
 
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/jeedom_x12.sh
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/jeedom_x12.sh
 mv jeedom_x12.sh jeedom.sh
 chmod +x jeedom.sh
 
