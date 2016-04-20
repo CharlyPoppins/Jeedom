@@ -15,14 +15,14 @@
 
 #status sous syno de apache2 et demarrage des services
 cd /home
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/jeedom.sh
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/jeedom.sh
 chmod +x jeedom.sh
 
 #recup config apache2 pour ne pas avoir de messages d'erreurs
 #Faut repondre N lors de la question à l'install de apache2
 cd /tmp
 mkdir /etc/apache2/
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/apache2.conf
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Config/apache2.conf
 mv /tmp/apache2.conf /etc/apache2
 
 chmod 777 /dev/tty*
