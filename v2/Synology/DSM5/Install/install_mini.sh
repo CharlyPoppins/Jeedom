@@ -1,6 +1,6 @@
 
 #!/bin/sh
-# SFY alias stef74
+# stef74 & PuNiSHeR
 # Version jeedom 2.1.1 en chroot synology
 # dans le chroot
 # cd /tmp
