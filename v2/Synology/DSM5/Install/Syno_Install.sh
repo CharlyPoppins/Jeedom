@@ -3,13 +3,13 @@
 # Installateur Jeedom v2.x.x
 # Synology Debian Chroot
 #
-# SFY alias stef74 & PuNiSHeR
+# stef74 & PuNiSHeR
 #
 # Dans le chroot :
 # cd /tmp
-# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install_x12.sh
-# chmod+x install_x12.sh
-# sh install_x12.sh
+# https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/install.sh
+# chmod+x install.sh
+# sh install.sh
 #
 # De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
 # Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
@@ -308,7 +308,8 @@ install_zwave() {
 				echo "${msg_install_zwave}"
 				echo "**********************************************************"
 				echo ""; echo "";
-				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Release/Chroot/install_zwave.sh
+				#wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Release/Chroot/install_zwave.sh
+				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Chroot/install_zwave.sh
 				chmod +x install_zwave.sh
 				./install_zwave.sh
 				break
@@ -469,7 +470,8 @@ case $CHOIX in
 		fi
 
 		cd /tmp
-		wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
+		#wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
+		wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Config/nginx_x12.conf
 
 		service nginx stop
 
@@ -492,10 +494,12 @@ case $CHOIX in
 		cd /home
 
 		if [ -f "/home/jeedom.sh" ];then
-			rm /home/jeedom.sh
+			#rm /home/jeedom.sh
+			mv /home/jeedom.sh /home/jeedom.old
 		fi
 
-		wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/jeedom_x12.sh
+		#wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/jeedom_x12.sh
+		wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/jeedom_x12.sh
 		mv jeedom_x12.sh jeedom.sh
 		chmod +x jeedom.sh
 
