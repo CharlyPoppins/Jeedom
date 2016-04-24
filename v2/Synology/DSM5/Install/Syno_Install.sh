@@ -7,9 +7,9 @@
 #
 # Dans le chroot :
 # cd /tmp
-# https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/install.sh
-# chmod+x install.sh
-# sh install.sh
+# https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/Syno_Install.sh
+# chmod+x Syno_Install.sh
+# sh Syno_Install.sh
 #
 # De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
 # Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
