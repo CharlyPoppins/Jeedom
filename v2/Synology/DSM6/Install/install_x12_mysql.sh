@@ -152,6 +152,7 @@ install_dependency() {
 	apt-get -y install htop
 	apt-get -y install nano
 	apt-get -y install ntp
+	apt-get -y install rlwrap
 }
 
 
@@ -372,7 +373,7 @@ install_zwave() {
 				echo "${msg_install_zwave}"
 				echo "**********************************************************"
 				echo ""; echo "";
-				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Release/Chroot/install_zwave.sh
+				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Chroot/install_zwave.sh
 				chmod +x install_zwave.sh
 				./install_zwave.sh
 				break
@@ -453,7 +454,7 @@ if [ -f '/etc/nginx/sites-available/defaults' ] ; then
 fi
 
 cd /tmp
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/nginx_x12.conf
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Config/nginx_x12.conf
 
 service nginx stop
 
@@ -476,7 +477,7 @@ if [ -f "/home/jeedom.sh" ];then
 	rm /home/jeedom.sh
 fi
 
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/jeedom_x12.sh
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Install/jeedom_x12.sh
 mv jeedom_x12.sh jeedom.sh
 chmod +x jeedom.sh
 
