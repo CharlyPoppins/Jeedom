@@ -4,7 +4,7 @@
 # Version jeedom 2.1.1 en chroot synology
 # dans le chroot
 # cd /tmp
-# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install_mini.sh
+# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/install_mini.sh
 # chmod+x install_mini.sh
 # sh install_mini.sh
 # Le port 8088 doit être non utilisé
