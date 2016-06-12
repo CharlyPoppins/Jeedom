@@ -152,6 +152,7 @@ install_dependency() {
 	apt-get -y install htop
 	apt-get -y install nano
 	apt-get -y install ntp
+	apt-get -y install rlwrap
 }
 
 
