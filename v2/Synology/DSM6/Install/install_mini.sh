@@ -53,7 +53,7 @@ apt-get -y install php5-gd
 apt-get -y install php-pear
 apt-get -y install unzip
 apt-get -y install ca-certificates
-
+apt-get -y install rlwrap
 	
 echo "export LANG=fr_FR.utf8" >> ~/.bashrc
 echo "export LC_ALL=fr_FR.utf8" >> ~/.bashrc
