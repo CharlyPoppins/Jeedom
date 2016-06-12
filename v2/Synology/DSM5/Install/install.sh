@@ -81,6 +81,7 @@ apt-get -y install libudev1
 apt-get -y install ca-certificates
 apt-get -y install htop
 apt-get -y install zip
+apt-get -y install rlwrap
 	
 	
 echo "export LANG=fr_FR.utf8" >> ~/.bashrc
