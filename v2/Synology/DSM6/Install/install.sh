@@ -17,14 +17,14 @@
 
 #status sous syno de apache2 et demarrage des services
 cd /home
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/jeedom.sh
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Install/jeedom.sh
 chmod +x jeedom.sh
 
 #recup config apache2 pour ne pas avoir de messages d'erreurs
 #Faut repondre N lors de la question à l'install de apache2
 cd /tmp
 mkdir /etc/apache2/
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/apache2.conf
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Install/apache2.conf
 mv /tmp/apache2.conf /etc/apache2
 
 chmod 777 /dev/tty*
@@ -58,11 +58,11 @@ apt-get -y install locate
 apt-get -y install mercurial-common
 apt-get -y install mysql-client-5.5
 apt-get -y install ncurses-term
-apt-get -y install node
-apt-get -y install node-normalize-package-data
-apt-get -y install node-request
+#apt-get -y install node
+#apt-get -y install node-normalize-package-data
+#apt-get -y install node-request
 apt-get -y install python-requests
-apt-get -y install nodejs
+#apt-get -y install nodejs
 apt-get -y install ntp
 apt-get -y install php5-common libapache2-mod-php5 php5-cli
 apt-get -y install php5-curl
@@ -81,6 +81,7 @@ apt-get -y install libudev1
 apt-get -y install ca-certificates
 apt-get -y install htop
 apt-get -y install zip
+apt-get -y install rlwrap
 	
 	
 echo "export LANG=fr_FR.utf8" >> ~/.bashrc
