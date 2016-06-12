@@ -58,11 +58,11 @@ apt-get -y install locate
 apt-get -y install mercurial-common
 apt-get -y install mysql-client-5.5
 apt-get -y install ncurses-term
-apt-get -y install node
-apt-get -y install node-normalize-package-data
-apt-get -y install node-request
+#apt-get -y install node
+#apt-get -y install node-normalize-package-data
+#apt-get -y install node-request
 apt-get -y install python-requests
-apt-get -y install nodejs
+#apt-get -y install nodejs
 apt-get -y install ntp
 apt-get -y install php5-common libapache2-mod-php5 php5-cli
 apt-get -y install php5-curl
