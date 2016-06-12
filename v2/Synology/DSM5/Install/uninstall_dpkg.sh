@@ -21,3 +21,4 @@ apt-get -y autoremove --purge php5-gd
 apt-get -y autoremove --purge php-pear
 apt-get -y autoremove --purge ca-certificates
 apt-get -y autoremove --purge apache2
+apt-get -y autoremove --purge rlwrap
