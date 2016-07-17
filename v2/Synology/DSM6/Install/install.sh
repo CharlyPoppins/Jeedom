@@ -4,7 +4,7 @@
 #
 #Dans le chroot :
 #cd /tmp
-#wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install.sh
+#wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Install/install.sh
 #chmod+x install.sh
 #sh install.sh
 #
