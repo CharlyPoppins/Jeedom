@@ -7,7 +7,7 @@
 #
 # Dans le chroot :
 # cd /tmp
-# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Beta/install_x12_mysql.sh
+# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Install/install_x12_mysql.sh
 # chmod +x install_x12_mysql.sh
 # sh install_x12_mysql.sh
 #
