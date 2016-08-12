@@ -166,7 +166,7 @@ install_webserver() {
 }
 
 
-configure_nginx() {
+configure_apache() {
 	echo ""; echo "";
 	echo -n "${msg_question_port}"
 	read answer
@@ -176,16 +176,16 @@ configure_nginx() {
 		if [ "$(echo $answer | grep -o ' ' | wc -l)" -ne 0 ]; then
 			echo ""; echo "";
 			echo "${msg_space_detected}";
-			configure_nginx
+			configure_apache
 		elif [ $answer -gt 65535 ]; then
 			echo ""; echo "";
 			echo "${msg_port_greater}";
-			configure_nginx
+			configure_apache
 		elif [ $answer -eq 80 ]; then
 			echo ""; echo "";
 			echo "${msg_port_already_used}";
 			echo "${msg_choose_other_port}";
-			configure_nginx
+			configure_apache
 		else
 			echo ""; echo "";
 			echo "${msg_your_port_choice}"$answer;
@@ -206,26 +206,26 @@ configure_nginx() {
 
 			echo "${msg_restart_nginx}";
 
-			service nginx start
+			service apache2 start
 
-			update-rc.d nginx defaults
+			update-rc.d apache2 defaults
 		fi
 	elif [ -z $answer ]; then
 		echo ""; echo "";
 		echo "${msg_not_empty_port}";
-		configure_nginx
+		configure_apache
 
 	else
 		echo ""; echo "";
 		echo "${msg_you_write}"$answer;
 		echo "";
 		echo "${msg_only_numbers}";
-		configure_nginx
+		configure_apache
 	fi
 }
 
 
-check_apache2() {
+check_nginx() {
 	echo ""; echo "";
 	echo "**********************************************************"
 	echo "${msg_check_apache}"
@@ -233,7 +233,7 @@ check_apache2() {
 	echo "";
 
 	#if [ $(ps ax | grep z-way-server | grep -v grep | wc -l ) -ne 0 ]; then
-	dpkg-query -l apache2 > /dev/null;
+	dpkg-query -l nginx > /dev/null;
 
 	if [ $? -ne 0 ] ; then
 		echo "";
