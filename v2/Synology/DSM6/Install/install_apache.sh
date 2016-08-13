@@ -193,7 +193,7 @@ configure_apache() {
 			echo ""; echo "";
 			sed -i 's/#listen   80;/listen '"$answer"';/g' /etc/apache2/ports.conf
 			sed -i 's/#listen   \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/apache2/ports.conf
-			sed -i 's/*:80;/listen '"$answer"';/g' /etc/apache2/sites-available/000-default.conf
+			sed -i 's/80/"$answer"/g' /etc/apache2/sites-available/000-default.conf
 
 			if [ -f '/etc/nginx/sites-enabled/default' ] ; then
 				rm /etc/apache2/sites-enabled/000-default.conf
@@ -419,4 +419,4 @@ rm /tmp/jeedom.zip
 
 # Redémarrage des services
 service cron restart
-service apache2 restart
+service apache2 start
