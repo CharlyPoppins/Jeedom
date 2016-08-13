@@ -364,7 +364,7 @@ service apache2 stop
 
 mv ports_apache2.conf /etc/apache2/port.conf
 
-configure_apache2
+configure_apache
 
 
 # Configuration de PHP
