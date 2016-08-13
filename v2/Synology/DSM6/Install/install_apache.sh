@@ -352,16 +352,13 @@ install_webserver
 
 
 # Configuration Port Virtualhost Nginx
-if [ -f '/etc/apache2/sites-available/defaults' ] ; then
-	rm /etc/apache2/sites-available/default
-fi
+#if [ -f '/etc/Nginx/sites-available/defaults' ] ; then
+#	rm /etc/Nginx/sites-available/default
+#fi
 
 cd /tmp
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Config/ports_apache2.conf
 
 service apache2 stop
-
-mv ports_apache2.conf /etc/apache2/port.conf
 
 configure_apache
 
