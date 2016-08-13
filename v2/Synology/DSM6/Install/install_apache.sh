@@ -191,18 +191,19 @@ configure_apache() {
 			echo "${msg_your_port_choice}"$answer;
 			echo "${msg_port_changing}";
 			echo ""; echo "";
-			sed -i 's/#listen   80;/listen '"$answer"';/g' /etc/nginx/sites-available/default
-			sed -i 's/#listen   \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/nginx/sites-available/default
+			sed -i 's/#listen   80;/listen '"$answer"';/g' /etc/apache2/pors.conf
+			sed -i 's/#listen   \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/apache2/pors.conf
+			sed -i 's/*:80;/listen '"$answer"';/g' /etc/apache2/sites-available/000-default.conf
 
 			if [ -f '/etc/nginx/sites-enabled/default' ] ; then
-				rm /etc/nginx/sites-enabled/default
-				cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+				rm /etc/apache2/sites-enabled/000-default.conf
+				cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 			fi
 
-			if [ ! -f '/etc/nginx/sites-available/jeedom_dynamic_rule' ] ; then
+			if [ ! -f '/etc/apache2/sites-available/jeedom_dynamic_rule' ] ; then
 				touch /etc/nginx/sites-available/jeedom_dynamic_rule
 			fi
-			chmod 777 /etc/nginx/sites-available/jeedom_dynamic_rule
+			chmod 777 /etc/apache2/sites-available/jeedom_dynamic_rule
 
 			echo "${msg_restart_nginx}";
 
@@ -238,14 +239,14 @@ check_nginx() {
 	if [ $? -ne 0 ] ; then
 		echo "";
 		echo "${msg_del_apache_detected}";
-		service apache2 stop
-		apt-get -y autoremove --purge apache2
+		service nginx stop
+		apt-get -y autoremove --purge nginx
 	fi
 
-	if [ -d "/etc/apache2" ]; then
+	if [ -d "/etc/nginx" ]; then
 		echo "";
 		echo "${msg_del_dir_apache}";
-		rm -Rf /etc/apache2
+		rm -Rf /etc/nginx
 	fi
 
 	if [ -d "/var/www/html" ]; then
@@ -344,7 +345,7 @@ echo "cd /home" >> ~/.bashrc
 
 
 # Vérification de la présence de Apache2
-check_apache2
+check_apache
 
 
 # Installation du Serveur Web
@@ -352,18 +353,18 @@ install_webserver
 
 
 # Configuration Port Virtualhost Nginx
-if [ -f '/etc/nginx/sites-available/defaults' ] ; then
-	rm /etc/nginx/sites-available/default
+if [ -f '/etc/apache2/sites-available/defaults' ] ; then
+	rm /etc/apache2/sites-available/default
 fi
 
 cd /tmp
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Config/nginx_x12.conf
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Config/ports_apache2.conf
 
-service nginx stop
+service apache2 stop
 
-mv nginx_x12.conf /etc/nginx/sites-available/default
+mv ports_apache2.conf /etc/apache2/port.conf
 
-configure_nginx
+configure_apache2
 
 
 # Configuration de PHP
@@ -381,11 +382,10 @@ if [ -f "/home/jeedom.sh" ];then
 	rm /home/jeedom.sh
 fi
 
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Install/jeedom_x12.sh
-mv jeedom_x12.sh jeedom.sh
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Install/jeedom.sh
 chmod +x jeedom.sh
 
-service nginx stop
+service apache2 stop
 
 rm /var/www/html/index.html
 
@@ -419,4 +419,4 @@ rm /tmp/jeedom.zip
 
 # Redémarrage des services
 service cron restart
-service nginx restart
+service apache2 restart
