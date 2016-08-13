@@ -201,7 +201,7 @@ configure_apache() {
 			fi
 
 			if [ ! -f '/etc/apache2/sites-available/jeedom_dynamic_rule' ] ; then
-				touch /etc/nginx/sites-available/jeedom_dynamic_rule
+				touch /etc/apache2/sites-available/jeedom_dynamic_rule
 			fi
 			chmod 777 /etc/apache2/sites-available/jeedom_dynamic_rule
 
