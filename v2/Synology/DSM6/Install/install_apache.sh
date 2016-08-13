@@ -191,8 +191,8 @@ configure_apache() {
 			echo "${msg_your_port_choice}"$answer;
 			echo "${msg_port_changing}";
 			echo ""; echo "";
-			sed -i 's/#listen   80;/listen '"$answer"';/g' /etc/apache2/pors.conf
-			sed -i 's/#listen   \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/apache2/pors.conf
+			sed -i 's/#listen   80;/listen '"$answer"';/g' /etc/apache2/ports.conf
+			sed -i 's/#listen   \[\:\:\]\:80/listen \[\:\:\]\:'"$answer"'/g' /etc/apache2/ports.conf
 			sed -i 's/*:80;/listen '"$answer"';/g' /etc/apache2/sites-available/000-default.conf
 
 			if [ -f '/etc/nginx/sites-enabled/default' ] ; then
