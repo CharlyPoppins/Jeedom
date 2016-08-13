@@ -8,7 +8,7 @@
 # Dans le chroot :
 # cd /tmp
 # wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Install/install_apache.sh
-# chmod+x install_apache.sh
+# chmod +x install_apache.sh
 # sh install_apache.sh
 #
 # De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
@@ -143,7 +143,7 @@ install_dependency() {
 
 install_webserver() {
 	apt-get -y install mysql-client
-	apt-get -y install apache1
+	apt-get -y install apache2
 	apt-get -y install php5-fpm
 	apt-get -y install php5-curl
 	apt-get -y install php5-dev
