@@ -366,8 +366,8 @@ echo "export LC_ALL=fr_FR.utf8" >> ~/.bashrc
 echo "cd /home" >> ~/.bashrc
 
 
-# Vérification de la présence de Apache2
-check_apache
+# Vérification de la présence de NGINX
+check_nginx
 
 
 # Installation du Serveur Web
