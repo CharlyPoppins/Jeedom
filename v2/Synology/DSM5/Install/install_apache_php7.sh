@@ -167,20 +167,19 @@ install_webserver() {
 	apt-get -y install libexpat1
 	apt-get -y install ssl-cert
 	apt-get -y install libapache2-mod-php5
-	#apt-get -y install php5-fpm
+	apt-get -y install php5-fpm
 	apt-get -y install php5-curl
-	#apt-get -y install php5-dev
-	#apt-get -y install php5-json
-	#apt-get -y install php5-mysql
-	#apt-get -y install php5-ldap
-	#apt-get -y install php5-gd
-	#apt-get -y install php-pear
+	apt-get -y install php5-dev
+	apt-get -y install php5-json
+	apt-get -y install php5-mysql
+	apt-get -y install php5-ldap
+	apt-get -y install php5-gd
+	apt-get -y install php-pear
 	apt-get -y install ca-certificates
-	#apt-get -y install php5-memcached 
-	#apt-get -y install php5-cli 
-	#apt-get -y install php5-ssh2
-	apt-get -y install php7.0 php7.0-curl php7.0-gd php7.0-imap php7.0-json php7.0-mcrypt php7.0-mysql php7.0-xml php7.0-opcache php7.0-soap php7.0-xmlrpc libapache2-mod-php7.0 php7.0-common php7.0-dev php7.0-zip php7.0-ssh2 
-
+	apt-get -y install php5-memcached 
+	apt-get -y install php5-cli 
+	apt-get -y install php5-ssh2
+	apt-get -y install php7.0 php7.0-curl php7.0-gd php7.0-imap php7.0-json php7.0-mcrypt php7.0-mysql php7.0-xml php7.0-opcache php7.0-soap php7.0-xmlrpc libapache2-mod-php7.0 php7.0-common php7.0-dev php7.0-zip php7.0-ssh2 php7.0-calendar
 	pecl install oauth
 	if [ $? -eq 0 ] ; then
 		for i in fpm cli ; do
