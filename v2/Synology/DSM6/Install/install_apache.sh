@@ -48,12 +48,16 @@ install_msg_fr() {
 	msg_port_changing="Changement de Port en Cours..."
 	msg_not_empty_port="Vous ne pouvez pas laisser le Port vide..."
 	msg_restart_nginx="Redemarrage de Nginx..."
+	msg_restart_apache2="Redemarrage de Apache2..."
 	msg_you_write="Vous avez introduit : "
 	msg_only_numbers="Veuillez introduire que des chiffres."
 	msg_del_apache_detected="Apache2 detecte, suppression en Cours..."
+	msg_del_nginx_detected="Nginx detecte, suppression en Cours..."
 	msg_del_dir_apache="Dossier Apache2 detecte, suppression en Cours..."
+	msg_del_dir_nginx="Dossier Apache2 detecte, suppression en Cours..."
 	msg_del_dir_html="Dossier HTML detecte, suppression en Cours..."
 	msg_check_apache="*      Verification de la Presence de Apache2         *"
+	msg_check_nginx="*      Verification de la Presence de NGINX         *"
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
 	msg_install_zwave="*          Installation dépendances Z-Wave            *"
@@ -77,12 +81,16 @@ install_msg_en() {
 	msg_port_changing="Changement de Port en Cours..."
 	msg_not_empty_port="Vous ne pouvez pas laisser le Port vide..."
 	msg_restart_nginx="Redemarrage de Nginx..."
+	msg_restart_apache2="Redemarrage de Apache2..."
 	msg_you_write="Vous avez introduit : "
 	msg_only_numbers="Veuillez introduire que des chiffres."
 	msg_del_apache_detected="Apache2 detecte, suppression en Cours..."
+	msg_del_nginx_detected="Nginx detecte, suppression en Cours..."
 	msg_del_dir_apache="Dossier Apache2 detecte, suppression en Cours..."
+	msg_del_dir_nginx="Dossier Apache2 detecte, suppression en Cours..."
 	msg_del_dir_html="Dossier HTML detecte, suppression en Cours..."
 	msg_check_apache="*      Verification de la Presence de Apache2         *"
+	msg_check_nginx="*      Verification de la Presence de NGINX         *"
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
 	msg_install_zwave="*          Installation dépendances Z-Wave            *"
@@ -106,12 +114,16 @@ install_msg_de() {
 	msg_port_changing="Changement de Port en Cours..."
 	msg_not_empty_port="Vous ne pouvez pas laisser le Port vide..."
 	msg_restart_nginx="Redemarrage de Nginx..."
+	msg_restart_apache2="Redemarrage de Apache2..."
 	msg_you_write="Vous avez introduit : "
 	msg_only_numbers="Veuillez introduire que des chiffres."
 	msg_del_apache_detected="Apache2 detecte, suppression en Cours..."
+	msg_del_nginx_detected="Nginx detecte, suppression en Cours..."
 	msg_del_dir_apache="Dossier Apache2 detecte, suppression en Cours..."
+	msg_del_dir_nginx="Dossier Apache2 detecte, suppression en Cours..."
 	msg_del_dir_html="Dossier HTML detecte, suppression en Cours..."
 	msg_check_apache="*      Verification de la Presence de Apache2         *"
+	msg_check_nginx="*      Verification de la Presence de NGINX         *"
 	msg_port_greater="Port incorrecte. Uniquement un Port compris entre 1 - 65535."
 	msg_space_detected="Vous avez insere un Espace dans le Numero de Port."
 	msg_install_zwave="*          Installation dépendances Z-Wave            *"
@@ -211,7 +223,7 @@ configure_apache() {
 			fi
 			chmod 777 /etc/apache2/sites-available/jeedom_dynamic_rule
 
-			echo "${msg_restart_nginx}";
+			echo "${msg_restart_apache2}";
 
 			service apache2 start
 
@@ -235,7 +247,7 @@ configure_apache() {
 check_nginx() {
 	echo ""; echo "";
 	echo "**********************************************************"
-	echo "${msg_check_apache}"
+	echo "${msg_check_nginx}"
 	echo "**********************************************************"
 	echo "";
 
@@ -244,14 +256,14 @@ check_nginx() {
 
 	if [ $? -ne 0 ] ; then
 		echo "";
-		echo "${msg_del_apache_detected}";
+		echo "${msg_del_nginx_detected}";
 		service nginx stop
 		apt-get -y autoremove --purge nginx
 	fi
 
 	if [ -d "/etc/nginx" ]; then
 		echo "";
-		echo "${msg_del_dir_apache}";
+		echo "${msg_del_dir_nginx}";
 		rm -Rf /etc/nginx
 	fi
 
