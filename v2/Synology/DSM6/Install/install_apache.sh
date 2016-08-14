@@ -426,11 +426,6 @@ rm /tmp/jeedom.zip
 	cp /var/www/html//install/apache_security /etc/apache2/conf-available/security.conf
 	rm /etc/apache2/conf-enabled/security.conf > /dev/null 2>&1
 	ln -s /etc/apache2/conf-available/security.conf /etc/apache2/conf-enabled/
-
-	cp /var/www/html//install/apache_default /etc/apache2/sites-available/000-default.conf
-	rm /etc/apache2/sites-enabled/000-default.conf > /dev/null 2>&1
-	ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/
-
 	rm /etc/apache2/conf-available/other-vhosts-access-log.conf > /dev/null 2>&1
 	rm /etc/apache2/conf-enabled/other-vhosts-access-log.conf > /dev/null 2>&1
 
