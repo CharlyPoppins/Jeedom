@@ -144,6 +144,10 @@ install_dependency() {
 install_webserver() {
 	apt-get -y install mysql-client
 	apt-get -y install apache2
+	apt-get -y install apache2-utils 
+	apt-get -y install libexpat1
+	apt-get -y install ssl-cert
+	apt-get -y install libapache2-mod-php5
 	apt-get -y install php5-fpm
 	apt-get -y install php5-curl
 	apt-get -y install php5-dev
@@ -153,6 +157,9 @@ install_webserver() {
 	apt-get -y install php5-gd
 	apt-get -y install php-pear
 	apt-get -y install ca-certificates
+	apt-get -y install php5-memcached 
+	apt-get -y install php5-cli 
+	apt-get -y install php5-ssh2
 
 	pecl install oauth
 	if [ $? -eq 0 ] ; then
@@ -262,6 +269,10 @@ configure_php() {
 	sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/fpm/php.ini
 	sed -i 's/expose_php = On/expose_php = Off/g' /etc/php5/fpm/php.ini
 	sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
+	sed -i 's/;opcache.enable=0/opcache.enable=1/g' /etc/php5/fpm/php.ini 
+	sed -i 's/opcache.enable=0/opcache.enable=1/g' /etc/php5/fpm/php.ini
+	sed -i 's/;opcache.enable_cli=0/opcache.enable_cli=1/g' /etc/php5/fpm/php.ini 
+	sed -i 's/opcache.enable_cli=0/opcache.enable_cli=1/g' /etc/php5/fpm/php.ini
 }
 
 
@@ -412,6 +423,16 @@ cp -R /root/core-*/.htaccess /var/www/html/
 
 rm /tmp/jeedom.zip
 
+	cp /var/www/html//install/apache_security /etc/apache2/conf-available/security.conf
+	rm /etc/apache2/conf-enabled/security.conf > /dev/null 2>&1
+	ln -s /etc/apache2/conf-available/security.conf /etc/apache2/conf-enabled/
+
+	cp /var/www/html//install/apache_default /etc/apache2/sites-available/000-default.conf
+	rm /etc/apache2/sites-enabled/000-default.conf > /dev/null 2>&1
+	ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/
+
+	rm /etc/apache2/conf-available/other-vhosts-access-log.conf > /dev/null 2>&1
+	rm /etc/apache2/conf-enabled/other-vhosts-access-log.conf > /dev/null 2>&1
 
 # Redémarrage des services
 service cron restart
