@@ -7,7 +7,7 @@
 #
 # Dans le chroot :
 # cd /tmp
-# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/install_apache.sh
+# wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/install_apache_php7.sh
 # chmod +x install_apache_php7.sh
 # sh install_apache.sh
 #
