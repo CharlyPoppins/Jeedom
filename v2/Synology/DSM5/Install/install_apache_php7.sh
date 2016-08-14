@@ -133,8 +133,7 @@ install_msg_de() {
 
 install_dependency() {
 	chmod 777 /dev/tty*
-	echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list
-	wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
+
 	
 	
 	apt-get update
@@ -154,10 +153,14 @@ install_dependency() {
 	apt-get -y install nano
 	apt-get -y install ntp
 	apt-get -y install rlwrap
+	apt-get -y install wget
 }
 
 
 install_webserver() {
+	echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list
+	wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
+	apt-get update
 	apt-get -y install mysql-client
 	apt-get -y install apache2
 	apt-get -y install apache2-utils 
