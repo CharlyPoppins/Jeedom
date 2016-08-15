@@ -211,16 +211,13 @@ configure_apache() {
 			echo "${msg_port_changing}";
 			echo ""; echo "";
 			
+			sed -i 's/Listen 80/Listen '"$answer"'/g' /etc/apache2/ports.conf
+			sed -i 's/80/'"$answer"'/g' /etc/apache2/sites-available/000-default.conf
+			
 			if [ -f '/etc/apache2/sites-enabled/000-default.conf' ] ; then
 				rm /etc/apache2/sites-enabled/000-default.conf
 				ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/
 			fi
-			
-			
-			
-		
-			sed -i 's/Listen 80/Listen '"$answer"'/g' /etc/apache2/ports.conf
-			sed -i 's/80/'"$answer"'/g' /etc/apache2/sites-available/000-default.conf
 
 			if [ ! -f '/etc/apache2/sites-available/jeedom_dynamic_rule' ] ; then
 				touch /etc/apache2/sites-available/jeedom_dynamic_rule
