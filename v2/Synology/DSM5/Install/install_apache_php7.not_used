@@ -166,19 +166,19 @@ install_webserver() {
 	apt-get -y install apache2-utils 
 	apt-get -y install libexpat1
 	apt-get -y install ssl-cert
-	apt-get -y install libapache2-mod-php5
+#	apt-get -y install libapache2-mod-php5
 	apt-get -y install php5-fpm
 	apt-get -y install php5-curl
-	apt-get -y install php5-dev
-	apt-get -y install php5-json
-	apt-get -y install php5-mysql
-	apt-get -y install php5-ldap
-	apt-get -y install php5-gd
-	apt-get -y install php-pear
+#	apt-get -y install php5-dev
+#	apt-get -y install php5-json
+#	apt-get -y install php5-mysql
+#	apt-get -y install php5-ldap
+#	apt-get -y install php5-gd
+#	apt-get -y install php-pear
 	apt-get -y install ca-certificates
-	apt-get -y install php5-memcached 
-	apt-get -y install php5-cli 
-	apt-get -y install php5-ssh2
+#	apt-get -y install php5-memcached 
+#	apt-get -y install php5-cli 
+#	apt-get -y install php5-ssh2
 	apt-get -y install php7.0 php7.0-curl php7.0-gd php7.0-imap php7.0-json php7.0-mcrypt php7.0-mysql php7.0-xml php7.0-opcache php7.0-soap php7.0-xmlrpc libapache2-mod-php7.0 php7.0-common php7.0-dev php7.0-zip php7.0-ssh2 php7.0-calendar
 	pecl install oauth
 	if [ $? -eq 0 ] ; then
@@ -220,7 +220,7 @@ configure_apache() {
 			sed -i 's/Listen 80/Listen '"$answer"'/g' /etc/apache2/ports.conf
 			sed -i 's/80/'"$answer"'/g' /etc/apache2/sites-available/000-default.conf
 
-			if [ -f '/etc/nginx/sites-enabled/default' ] ; then
+			if [ -f '/etc/apache2/sites-enabled/000-default.conf' ] ; then
 				rm /etc/apache2/sites-enabled/000-default.conf
 				cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 			fi
@@ -313,7 +313,7 @@ install_zwave() {
 				echo "${msg_install_zwave}"
 				echo "**********************************************************"
 				echo ""; echo "";
-				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Chroot/install_zwave.sh
+				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Chroot/install_zwave.sh
 				chmod +x install_zwave.sh
 				./install_zwave.sh
 				break
@@ -413,7 +413,7 @@ if [ -f "/home/jeedom.sh" ];then
 	rm /home/jeedom.sh
 fi
 
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Install/jeedom.sh
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/jeedom.sh
 chmod +x jeedom.sh
 
 service apache2 stop
