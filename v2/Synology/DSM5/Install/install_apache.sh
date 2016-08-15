@@ -213,7 +213,7 @@ configure_apache() {
 			sed -i 's/Listen 80/Listen '"$answer"'/g' /etc/apache2/ports.conf
 			sed -i 's/80/'"$answer"'/g' /etc/apache2/sites-available/000-default.conf
 
-			if [ -f '/etc/nginx/sites-enabled/default' ] ; then
+			if [ -f '/etc/apache2/sites-enabled/000-default.conf' ] ; then
 				rm /etc/apache2/sites-enabled/000-default.conf
 				cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 			fi
