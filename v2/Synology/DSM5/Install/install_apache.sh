@@ -212,11 +212,11 @@ configure_apache() {
 			echo ""; echo "";
 			
 			if [ -f '/etc/apache2/sites-enabled/000-default.conf' ] ; then
-				rm /etc/apache2/sites-available/000-default.conf
+				rm /etc/apache2/sites-enabled/000-default.conf
+				ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/
 			fi
 			
-			cp /var/www/html/install/apache_default /etc/apache2/sites-enabled/000-default.conf
-			ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/
+			
 			
 		
 			sed -i 's/Listen 80/Listen '"$answer"'/g' /etc/apache2/ports.conf
@@ -305,7 +305,7 @@ install_zwave() {
 				echo "${msg_install_zwave}"
 				echo "**********************************************************"
 				echo ""; echo "";
-				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Chroot/install_zwave.sh
+				wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Chroot/install_zwave.sh
 				chmod +x install_zwave.sh
 				./install_zwave.sh
 				break
@@ -398,14 +398,14 @@ configure_php
 install_zwave
 
 
-# Status sous syno de Nginx et demarrage des services Jeedom
+# Status sous syno de Apache et demarrage des services Jeedom
 cd /home
 
 if [ -f "/home/jeedom.sh" ];then
 	rm /home/jeedom.sh
 fi
 
-wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Install/jeedom.sh
+wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM5/Install/jeedom.sh
 chmod +x jeedom.sh
 
 service apache2 stop
