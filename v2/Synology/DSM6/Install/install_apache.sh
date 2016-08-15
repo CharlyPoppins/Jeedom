@@ -12,7 +12,7 @@
 # sh install_apache.sh
 #
 # De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
-# Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
+# Avoir installé les drivers usb soit manuellement par le spk http://www.jadahl.com/synology6/index.php?fulllist=true
 # Enocean don't work on 32bits.
 
 
@@ -213,12 +213,15 @@ configure_apache() {
 			
 			if [ -f '/etc/apache2/sites-enabled/000-default.conf' ] ; then
 				rm /etc/apache2/sites-enabled/000-default.conf
-				cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+				ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/
 			fi
+			
+			
+			
 		
 			sed -i 's/Listen 80/Listen '"$answer"'/g' /etc/apache2/ports.conf
 			sed -i 's/80/'"$answer"'/g' /etc/apache2/sites-available/000-default.conf
-			
+
 			if [ ! -f '/etc/apache2/sites-available/jeedom_dynamic_rule' ] ; then
 				touch /etc/apache2/sites-available/jeedom_dynamic_rule
 			fi
@@ -395,7 +398,7 @@ configure_php
 install_zwave
 
 
-# Status sous syno de Nginx et demarrage des services Jeedom
+# Status sous syno de Apache et demarrage des services Jeedom
 cd /home
 
 if [ -f "/home/jeedom.sh" ];then
