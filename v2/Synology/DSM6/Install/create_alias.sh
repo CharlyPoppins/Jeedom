@@ -2,7 +2,7 @@
 
 cp /bin/ash /usr/local/debian-chroot/var/chroottarget/bin/
 
-echo 'alias debian="chroot /usr/local/debian-chroot/var/chroottarget/ /bin/bash"' >> ~/.profile
+alias debian="sudo chroot /usr/local/debian-chroot/var/chroottarget/ /bin/bash"
 
 rm /volume1/debian
 
