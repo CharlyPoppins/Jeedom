@@ -158,7 +158,7 @@ install_dependency() {
 
 
 install_webserver() {
-	echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list
+	echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list
 	wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
 	apt-get update
 	apt-get -y install mysql-client
