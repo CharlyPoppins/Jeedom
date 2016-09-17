@@ -437,7 +437,8 @@ cronjob="* * * * * $croncmd"
 # Changement des droits
 check_right
 
-service php5-fpm restart
+#Avec php7 plus utilisé
+#service php5-fpm restart
 
 
 # D'apres la doc jeedom
