@@ -19,7 +19,7 @@ else
 	echo "Suppression du Nodejs existant et installation du paquet recommandé"
 	sudo apt-get -y --purge autoremove nodejs npm
 	arch=`arch`;
-	echo 30 > /tmp/espeasy_dep
+
 	if [[ $arch == "armv6l" ]]
 	then
 		echo "Raspberry 1 détecté, utilisation du paquet pour armv6"
