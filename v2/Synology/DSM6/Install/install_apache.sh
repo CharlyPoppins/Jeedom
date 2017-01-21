@@ -171,7 +171,9 @@ install_webserver() {
 	apt-get -y install ca-certificates
 	apt-get -y install php5-memcached 
 	apt-get -y install php5-cli 
-	apt-get -y install php5-ssh2
+	apt-get -y install php5-ssh2 
+	apt-get -y install python-pip
+	
 
 	pecl install oauth
 	if [ $? -eq 0 ] ; then
