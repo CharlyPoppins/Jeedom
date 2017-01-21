@@ -183,6 +183,7 @@ install_webserver() {
 #	apt-get -y install php5-ssh2
 	apt-get -y install smbclient
 	apt-get -y install php7.0 php7.0-curl php7.0-gd php7.0-imap php7.0-json php7.0-mcrypt php7.0-mysql php7.0-xml php7.0-opcache php7.0-soap php7.0-xmlrpc libapache2-mod-php7.0 php7.0-common php7.0-dev php7.0-zip php7.0-ssh2 php7.0-calendar
+	apt-get -y install python-pip
 	pecl install oauth
 	if [ $? -eq 0 ] ; then
 		for i in fpm cli ; do
