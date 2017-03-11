@@ -2,13 +2,19 @@
 
 # sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/PatchCache.sh -O /home/PatchCache.sh && chmod +x /home/PatchCache.sh && sh /home/PatchCache.sh
 
+
 echo ""; echo "";
 echo "**********************************************************"
 echo "Patch Jeedom v2.4.6"
 echo ""
 echo "Démarrage du Correctif du Cache Jeedom."
 echo "**********************************************************"
-echo "";
+echo ""
+
+echo "Merci à la Team Jeedom d'avoir apporté un correctif !"
+echo ""
+
+sleep 3
 
 classDir=$(find /var/www -iname class -type d | egrep -v "tests|plugins")
 installDir=$(find /var/www -iname install -type d)
@@ -17,7 +23,7 @@ echo ""; echo "";
 echo "**********************************************************"
 echo "Lancement d'un Backup Jeedom."
 echo "**********************************************************"
-echo "";
+echo ""
 
 sudo php ${installDir}/backup.php
 
@@ -25,7 +31,11 @@ echo ""; echo "";
 echo "**********************************************************"
 echo "Backup des fichiers à Patcher."
 echo "**********************************************************"
-echo "";
+echo ""
+
+echo "Les fichiers concernés vont être renomé en .bck"
+
+sleep 3
 
 sudo chmod 777 -R /var/www
 
@@ -40,7 +50,7 @@ echo ""; echo "";
 echo "**********************************************************"
 echo "Téléchargement des fichiers Patchés."
 echo "**********************************************************"
-echo "";
+echo ""
 
 sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/cache.class.php -O ${classDir}/cache.class.php
 sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/cmd.class.php -O ${classDir}/cmd.class.php
@@ -53,9 +63,10 @@ echo ""; echo "";
 echo "**********************************************************"
 echo "Nettoyage du dossier TMP."
 echo "**********************************************************"
-echo "";
+echo ""
 
 echo "Veuillez patienter, cela peut durer +/- 2 minutes."
+echo ""
 
 sudo php ${installDir}/consistency.php
 
@@ -63,15 +74,23 @@ echo ""; echo "";
 echo "**********************************************************"
 echo "Mise à plat des droits."
 echo "**********************************************************"
-echo "";
+echo ""
 
 sudo chmod 775 -R /var/www
 sudo chown -R www-data:www-data /var/www
+
+sleep 2
+
+echo "OK"
 
 echo ""; echo "";
 echo "**********************************************************"
 echo "Redémarrage de Jeedom."
 echo "**********************************************************"
-echo "";
+echo ""
+
+echo "En Cours..."
+
+sleep 2
 
 sudo reboot
