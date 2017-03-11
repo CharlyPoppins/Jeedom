@@ -8,34 +8,14 @@ echo "Démarrage du Correctif du Cache Jeedom."
 echo "**********************************************************"
 echo "";
 
-while true ; do
-	echo ""; echo "";
-	echo -n "Est ce que l'URL de votre serveur contient /jeedom ? (oui/non) : "
-	read answer
-
-	case $answer in
-		oui)
-			echo ""; echo "";
-			PATH_JEEDOM="/var/www/html/jeedom"
-			break
-		;;
-		non)
-			echo ""; echo "";
-			PATH_JEEDOM="/var/www/html"
-			break
-		;;
-	esac
-	echo "";
-done
-
 
 echo ""; echo "";
 echo "**********************************************************"
-echo "Backup de Jeedom."
+echo "Lancement d'un Backup Jeedom."
 echo "**********************************************************"
 echo "";
 
-sudo php ${PATH_JEEDOM}/install/backup.php
+sudo php $(find /var/www -iname backup.php -type f)
 
 echo ""; echo "";
 echo "**********************************************************"
@@ -43,15 +23,17 @@ echo "Backup des fichiers à Patcher."
 echo "**********************************************************"
 echo "";
 
-sudo chown -R www-data:www-data /var/www
 sudo chmod 0777 -R /var/www
 
-sudo cp -v -p ${PATH_JEEDOM}/core/class/cache.class.php ${PATH_JEEDOM}/core/class/cache.class.php.bck
-sudo cp -v -p ${PATH_JEEDOM}/core/cmd.class.php ${PATH_JEEDOM}/core/class/cmd.class.php.bck
-sudo cp -v -p ${PATH_JEEDOM}/core/class/cron.class.php ${PATH_JEEDOM}/core/class/cron.class.php.bck
-sudo cp -v -p ${PATH_JEEDOM}/core/class/eqLogic.class.php ${PATH_JEEDOM}/core/class/eqLogic.class.php.bck
-sudo cp -v -p ${PATH_JEEDOM}/core/class/scenario.class.php ${PATH_JEEDOM}/core/class/scenario.class.php.bck
-sudo cp -v -p ${PATH_JEEDOM}/install/consistency.php ${PATH_JEEDOM}/install/consistency.php.bck
+classDir=$(find /var/www -iname class -type d | egrep -v "tests|plugins")
+installDir=$(find /var/www -iname install -type d)
+
+sudo cp -v -p ${classDir}/cache.class.php ${classDir}/cache.class.php.bck
+sudo cp -v -p ${classDir}/cmd.class.php ${classDir}/cmd.class.php.bck
+sudo cp -v -p ${classDir}/cron.class.php ${classDir}/cron.class.php.bck
+sudo cp -v -p ${classDir}/eqLogic.class.php ${classDir}/eqLogic.class.php.bck
+sudo cp -v -p ${classDir}/scenario.class.php ${classDir}/scenario.class.php.bck
+sudo cp -v -p ${installDir}/consistency.php ${installDir}/consistency.php.bck
 
 echo ""; echo "";
 echo "**********************************************************"
