@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/PatchCache.sh -O /home/PatchCache.sh && chmod +x /home/PatchCache.sh && sh /home/PatchCache.sh
+
 echo ""; echo "";
 echo "**********************************************************"
 echo "Patch Jeedom v2.4.6"
