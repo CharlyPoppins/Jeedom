@@ -11,7 +11,7 @@ echo "Démarrage du Correctif du Cache Jeedom."
 echo "**********************************************************"
 echo ""
 
-echo "Merci à la Team Jeedom d'avoir apporté un correctif !"
+echo "Merci à la Team Jeedom d'avoir apportée un correctif !"
 echo ""
 
 sleep 3
