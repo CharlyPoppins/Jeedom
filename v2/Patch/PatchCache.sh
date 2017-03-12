@@ -16,7 +16,7 @@ echo ""
 
 sleep 3
 
-classDir=$(find /var/www -iname class -type d | egrep -v "tests|plugins")
+classDir=$(find /var/www -iname class -type d | egrep -v "tests|plugins|ajax")
 installDir=$(find /var/www -iname install -type d)
 
 echo ""; echo "";
@@ -27,7 +27,7 @@ echo ""
 
 echo "Backup de Jeedom en Cours..."
 
-sudo php ${installDir}/backup.php >> /home/PatchLog.txt
+sudo php ${installDir}/backup.php >> ${installDir}/PatchLog.txt
 
 echo ""; echo "";
 echo "**********************************************************"
@@ -41,12 +41,12 @@ sleep 3
 
 sudo chmod 777 -R /var/www
 
-sudo cp -v -p ${classDir}/cache.class.php ${classDir}/cache.class.php.bck >> /home/PatchLog.txt
-sudo cp -v -p ${classDir}/cmd.class.php ${classDir}/cmd.class.php.bck >> /home/PatchLog.txt
-sudo cp -v -p ${classDir}/cron.class.php ${classDir}/cron.class.php.bck >> /home/PatchLog.txt
-sudo cp -v -p ${classDir}/eqLogic.class.php ${classDir}/eqLogic.class.php.bck >> /home/PatchLog.txt
-sudo cp -v -p ${classDir}/scenario.class.php ${classDir}/scenario.class.php.bck >> /home/PatchLog.txt
-sudo cp -v -p ${installDir}/consistency.php ${installDir}/consistency.php.bck >> /home/PatchLog.txt
+sudo cp -v -p ${classDir}/cache.class.php ${classDir}/cache.class.php.bck >> ${installDir}/PatchLog.txt
+sudo cp -v -p ${classDir}/cmd.class.php ${classDir}/cmd.class.php.bck >> ${installDir}/PatchLog.txt
+sudo cp -v -p ${classDir}/cron.class.php ${classDir}/cron.class.php.bck >> ${installDir}/PatchLog.txt
+sudo cp -v -p ${classDir}/eqLogic.class.php ${classDir}/eqLogic.class.php.bck >> ${installDir}/PatchLog.txt
+sudo cp -v -p ${classDir}/scenario.class.php ${classDir}/scenario.class.php.bck >> ${installDir}/PatchLog.txt
+sudo cp -v -p ${installDir}/consistency.php ${installDir}/consistency.php.bck >> ${installDir}/PatchLog.txt
 
 echo ""; echo "";
 echo "**********************************************************"
@@ -56,12 +56,12 @@ echo ""
 
 echo "Téléchargement et remplacement des fichiers en Cours..."
 
-sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/cache.class.php -O ${classDir}/cache.class.php >> /home/PatchLog.txt
-sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/cmd.class.php -O ${classDir}/cmd.class.php >> /home/PatchLog.txt
-sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/cron.class.php -O ${classDir}/cron.class.php >> /home/PatchLog.txt
-sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/eqLogic.class.php -O ${classDir}/eqLogic.class.php >> /home/PatchLog.txt
-sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/scenario.class.php -O ${classDir}/scenario.class.php >> /home/PatchLog.txt
-sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/consistency.php -O ${installDir}/consistency.php >> /home/PatchLog.txt
+sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/cache.class.php -O ${classDir}/cache.class.php >> ${installDir}/PatchLog.txt
+sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/cmd.class.php -O ${classDir}/cmd.class.php >> ${installDir}/PatchLog.txt
+sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/cron.class.php -O ${classDir}/cron.class.php >> ${installDir}/PatchLog.txt
+sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/eqLogic.class.php -O ${classDir}/eqLogic.class.php >> ${installDir}/PatchLog.txt
+sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/scenario.class.php -O ${classDir}/scenario.class.php >> ${installDir}/PatchLog.txt
+sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/consistency.php -O ${installDir}/consistency.php >> ${installDir}/PatchLog.txt
 
 echo ""; echo "";
 echo "**********************************************************"
@@ -72,7 +72,7 @@ echo ""
 echo "Veuillez patienter, cela peut durer +/- 2 minutes."
 echo ""
 
-sudo php ${installDir}/consistency.php >> /home/PatchLog.txt
+sudo php ${installDir}/consistency.php >> ${installDir}/PatchLog.txt
 
 echo ""; echo "";
 echo "**********************************************************"
