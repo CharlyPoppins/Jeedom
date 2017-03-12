@@ -25,6 +25,8 @@ echo "Lancement d'un Backup Jeedom."
 echo "**********************************************************"
 echo ""
 
+echo "Backup de Jeedom en Cours..."
+
 sudo php ${installDir}/backup.php >> /home/PatchLog.txt
 
 echo ""; echo "";
@@ -33,7 +35,7 @@ echo "Backup des fichiers à Patcher."
 echo "**********************************************************"
 echo ""
 
-echo "Les fichiers concernés vont être renomé en .bck"
+echo "Les fichiers concernés vont être renommés en .bck"
 
 sleep 3
 
@@ -51,6 +53,8 @@ echo "**********************************************************"
 echo "Téléchargement des fichiers Patchés."
 echo "**********************************************************"
 echo ""
+
+echo "Téléchargement et remplacement des fichiers en Cours..."
 
 sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/cache.class.php -O ${classDir}/cache.class.php >> /home/PatchLog.txt
 sudo wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Patch/cmd.class.php -O ${classDir}/cmd.class.php >> /home/PatchLog.txt
