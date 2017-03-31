@@ -279,15 +279,30 @@ check_nginx() {
 
 
 configure_php() {
-	sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/apache2/php.ini
-	sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/apache2/php.ini
-	sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/apache2/php.ini
-	sed -i 's/expose_php = On/expose_php = Off/g' /etc/apache2/fpm/php.ini
-	sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
-	sed -i 's/;opcache.enable=0/opcache.enable=1/g' /etc/php5/apache2/php.ini 
-	sed -i 's/opcache.enable=0/opcache.enable=1/g' /etc/php5/apache2/php.ini
-	sed -i 's/;opcache.enable_cli=0/opcache.enable_cli=1/g' /etc/php5/apache2/php.ini 
-	sed -i 's/opcache.enable_cli=0/opcache.enable_cli=1/g' /etc/php5/apache2/php.ini
+	//sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /etc/php5/apache2/php.ini
+	//sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' /etc/php5/apache2/php.ini
+	//sed -i 's/post_max_size = 8M/post_max_size = 1G/g' /etc/php5/apache2/php.ini
+	//sed -i 's/expose_php = On/expose_php = Off/g' /etc/apache2/fpm/php.ini
+	//sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php5/fpm/pool.d/www.conf
+	//sed -i 's/;opcache.enable=0/opcache.enable=1/g' /etc/php5/apache2/php.ini 
+	//sed -i 's/opcache.enable=0/opcache.enable=1/g' /etc/php5/apache2/php.ini
+	//sed -i 's/;opcache.enable_cli=0/opcache.enable_cli=1/g' /etc/php5/apache2/php.ini 
+	//sed -i 's/opcache.enable_cli=0/opcache.enable_cli=1/g' /etc/php5/apache2/php.ini
+	
+	for file in ` find / -name php.ini -type f`;do
+		echo "Update php file ${file}"
+		sed -i 's/max_execution_time = 30/max_execution_time = 600/g' ${file} > /dev/null 2>&1
+	    sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' ${file} > /dev/null 2>&1
+	    sed -i 's/post_max_size = 8M/post_max_size = 1G/g' ${file} > /dev/null 2>&1
+	    sed -i 's/expose_php = On/expose_php = Off/g' ${file} > /dev/null 2>&1
+	    sed -i 's/;opcache.enable=0/opcache.enable=1/g' ${file} > /dev/null 2>&1
+	    sed -i 's/opcache.enable=0/opcache.enable=1/g' ${file} > /dev/null 2>&1
+	    sed -i 's/;opcache.enable_cli=0/opcache.enable_cli=1/g' ${file} > /dev/null 2>&1
+	    sed -i 's/opcache.enable_cli=0/opcache.enable_cli=1/g' ${file} > /dev/null 2>&1
+	done
+	
+	a2dismod status
+	systemctl restart apache2 > /dev/null 2>&1
 }
 
 
