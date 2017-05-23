@@ -20,9 +20,8 @@ else
 	sudo apt-get -y --purge autoremove nodejs npm
 	arch=`arch`;
 
-	if [[ $arch == "armv6l" ]]
+	if [[ $arch == "armv6l" || $arch == "armv7l" ]]
 	then
-		echo "Raspberry 1 détecté, utilisation du paquet pour armv6"
 		sudo rm /etc/apt/sources.list.d/nodesource.list
 		wget http://node-arm.herokuapp.com/node_latest_armhf.deb
 		sudo dpkg -i node_latest_armhf.deb
