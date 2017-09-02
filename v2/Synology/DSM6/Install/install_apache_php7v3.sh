@@ -8,8 +8,8 @@
 # Dans le chroot :
 # cd /tmp
 # wget --no-check-certificate https://raw.githubusercontent.com/PuNiSHeR374/Jeedom/master/v2/Synology/DSM6/Install/install_apache_php7v3.sh
-# chmod +x install_apache_php7.sh
-# sh install_apache_php7.sh
+# chmod +x install_apache_php7v3.sh
+# sh install_apache_php7v3.sh
 #
 # De preférence un chroot tout neuf avec un reboot du nas chroot a deja été installé.
 # Avoir installé les drivers usb soit manuellement soit par le spk http://www.jadahl.com/domoticz_beta/packages/UsbSerialDrivers_3.0.9.spk
