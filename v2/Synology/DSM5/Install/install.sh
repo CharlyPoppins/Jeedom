@@ -133,6 +133,18 @@ sudo chmod -R 775 /var/www/html
 #d'apres la doc jeedom
 mkdir -p /var/www/html
 rm -rf /root/core-*
+######## V2 ########################
+#wget https://github.com/jeedom/core/archive/stable.zip -O /tmp/jeedom.zip
+
+####### V3 #########################
+wget https://github.com/jeedom/core/archive/stablev3.zip -O /tmp/jeedom.zip
+################################################
+
+unzip -q /tmp/jeedom.zip -d /root/
+cp -R /root/core-*/* /var/www/html/
+cp -R /root/core-*/.htaccess /var/www/html/
+
+rm /tmp/jeedom.zip
 ######## V3 ########################
 echo "* * * * * root /usr/bin/php /var/www/html/core/php/jeeCron.php >> /dev/null" > /etc/cron.d/jeedom
 ################################################ 
