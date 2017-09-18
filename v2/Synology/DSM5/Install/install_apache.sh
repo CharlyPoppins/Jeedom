@@ -429,19 +429,31 @@ service php5-fpm restart
 # D'apres la doc jeedom
 mkdir -p /var/www/html
 rm -rf /root/core-*
-wget https://github.com/jeedom/core/archive/stable.zip -O /tmp/jeedom.zip
+######## V2 ########################
+#wget https://github.com/jeedom/core/archive/stable.zip -O /tmp/jeedom.zip
+
+####### V3 #########################
+wget https://github.com/jeedom/core/archive/stablev3.zip -O /tmp/jeedom.zip
+################################################
+
 unzip -q /tmp/jeedom.zip -d /root/
 cp -R /root/core-*/* /var/www/html/
 cp -R /root/core-*/.htaccess /var/www/html/
 
 rm /tmp/jeedom.zip
-
+######## V3 ########################
+echo "* * * * * root /usr/bin/php /var/www/html/core/php/jeeCron.php >> /dev/null" > /etc/cron.d/jeedom
+################################################ 
 	cp /var/www/html//install/apache_security /etc/apache2/conf-available/security.conf
 	rm /etc/apache2/conf-enabled/security.conf > /dev/null 2>&1
 	ln -s /etc/apache2/conf-available/security.conf /etc/apache2/conf-enabled/
 	rm /etc/apache2/conf-available/other-vhosts-access-log.conf > /dev/null 2>&1
 	rm /etc/apache2/conf-enabled/other-vhosts-access-log.conf > /dev/null 2>&1
 
+# Redémarrage des services
+####### V3 #########################
+service apache2 reload
+################################################
 # Redémarrage des services
 service cron restart
 service apache2 start
