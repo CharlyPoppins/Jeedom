@@ -154,6 +154,12 @@ cp -R /root/core-*/.htaccess /var/www/html/
 
 #ajout pour v3
 echo "* * * * * root /usr/bin/php /var/www/html/core/php/jeeCron.php >> /dev/null" > /etc/cron.d/jeedom
+cp /var/www/html//install/apache_security /etc/apache2/conf-available/security.conf
+	rm /etc/apache2/conf-enabled/security.conf > /dev/null 2>&1
+	ln -s /etc/apache2/conf-available/security.conf /etc/apache2/conf-enabled/
+	rm /etc/apache2/conf-available/other-vhosts-access-log.conf > /dev/null 2>&1
+	rm /etc/apache2/conf-enabled/other-vhosts-access-log.conf > /dev/null 2>&1
+	
 service apache2 reload
 
 # redemarrage des services
